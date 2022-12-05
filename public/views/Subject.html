@@ -1,0 +1,785 @@
+<!-- <style>
+  /* The Modal (background) */
+
+  .modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+  }
+  /* Modal Content/Box */
+
+  .modal-content {
+    color: #414242;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 30px 60px;
+    width: 500px;
+    /* Could be more or less, depending on screen size */
+    font-family: Lato;
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: 0.5px;
+    -webkit-font-smoothing: antialiased;
+    /* Rectangle 2 Copy 3: */
+    background: #ffffff;
+    border: 1px solid #9b9c9d;
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+  }
+
+  .modal-content a {
+    color: #636464;
+  }
+
+  .modal-content > h1 {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  button#accept {
+    margin: 30px auto;
+    display: block;
+    border: 1px solid #fc4c02;
+    border-radius: 3px;
+    background: #fff;
+    color: #fc4c02;
+    font-size: 16px;
+    height: 48px;
+    padding: 0 20px;
+    cursor: pointer;
+  }
+
+  .safety {
+    color: #9b9c9d;
+    font-size: 12px;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+  }
+
+  .close {
+    background: #606061;
+    color: #ffffff;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -10px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+  }
+
+  .close:hover {
+    background: #00d9ff;
+  }
+</style> -->
+
+<div ng-controller="SubjectCtrl">
+  <!-- <h2>Users</h2> -->
+  <br />
+  <!-- <input
+      type="button"
+      value="Add User"
+      class="btn btn btn-success"
+      style="float: right"
+      id="addUser"
+      ng-click="addUsers()"
+    /> -->
+
+  <div class="">
+    <button
+      class="btn btn-success"
+      type="button"
+      data-toggle="modal"
+      data-backdrop="static"
+      data-keyboard="false"
+      data-target="#myModal11"
+      ng-click=""
+      style="float: right"
+    >
+      Add Subjects
+    </button>
+    <br />
+    <br />
+
+    <table class="table table-bordered table-hover bg-white-only">
+      <thead>
+        <tr style="font-weight: bold">
+          <td style="width: 20%">Course Code</td>
+          <td style="width: 30%">Course Title</td>
+          <td style="width: 10%">Lec Unit(s)</td>
+          <td style="width: 10%">Lab Unit(s)</td>
+          <td style="width: 10%">Unit(s)</td>
+          <!-- <td style="width:35%">Fullname</td> -->
+          <td style="width: 35%">Pre-Requisited</td>
+          <!-- <td style="width:20%">Country</td>
+                  <td style="width:20%">Gender</td> -->
+          <!-- <td style="width:35%">Address</td>
+              <td style="width:25%">Number</td> -->
+          <td style="width: 20%">Actions</td>
+        </tr>
+      </thead>
+
+      <tbody id="myTable">
+        <tr ng-repeat="users in data">
+          <td class="v-middle">
+            <!-- editable username (text with validation) -->
+            <span>
+              <!-- <div ng-bind-html="users.username"></div> -->
+              {{ users.code }}
+            </span>
+          </td>
+          <td class="v-middle">
+            <!-- editable username (text with validation) -->
+            <span>
+              <!-- <div ng-bind-html="users.username"></div> -->
+              {{ users.title }}
+            </span>
+          </td>
+          <td class="v-middle">
+            <!-- editable username (text with validation) -->
+            <span>
+              <!-- <div ng-bind-html="users.username"></div> -->
+              {{ users.lecUnits }}
+            </span>
+          </td>
+          <td class="v-middle">
+            <!-- editable username (text with validation) -->
+            <span>
+              <!-- <div ng-bind-html="users.username"></div> -->
+              {{ users.labUnits }}
+            </span>
+          </td>
+          <!-- <td class="v-middle">
+                  editable username (text with validation)
+                  <span>
+  {{ users.fullname }}
+  </span>
+              </td> -->
+          <td class="v-middle">
+            <!-- editable status (select-local) -->
+            <span> {{ users.units }} </span>
+          </td>
+          <!--<td class="v-middle">
+                   editable status (select-local) 
+                  <span>
+  {{ users.address }}
+  </span>
+              </td>
+              <td class="v-middle">
+                   editable status (select-local) 
+                  <span>
+  {{ users.number }}
+  </span>
+              </td> -->
+          <td class="v-middle">
+            <!-- editable group (select-remote) -->
+            <span> {{ users.preRequisited }} </span>
+          </td>
+          <td style="white-space: nowrap">
+            <div class="pull-left"></div>
+            <button
+              type="button"
+              class="btn btn btn-info"
+              ng-click="selectUser(users)"
+            >
+              edit
+            </button>
+            <button
+              type="button"
+              class="btn btn btn-danger"
+              ng-click="selectUser2(users)"
+            >
+              delete
+            </button>
+            <!-- </div>
+                  <button class="btn btn-xs btn-info" ng-click="rowform.$show()">edit</button>
+                  <button class="btn btn-xs btn-danger" ng-click="removeUser($index)">del</button>
+              </div> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModalEdit" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Edit User</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              ng-click="close()"
+            >
+              &times;
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label class="">Username</label>
+              <div class="">
+                <input
+                  type="text"
+                  class="form-control"
+                  ng-value="newUsername"
+                  ng-model="clickedUser.username"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="">Email</label>
+              <div class="0">
+                <input
+                  type="text"
+                  class="form-control"
+                  ng-value="newEmail"
+                  ng-model="clickedUser.email"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="">Role</label>
+              <div class="">
+                <!-- <select ng-if="clickedUser.role == 'ordinary'">
+      <option type="text" class="form-control" ng-value="newRole" ng-model="clickedUser.role">{{clickedUser.role}}</option>
+          <option ng-repeat="role in roleDetails1">{{role.rolename}}</option> 
+  </select>
+  
+  <select ng-if="clickedUser.role == 'investor'">
+      <option type="text" class="form-control" ng-value="newRole" ng-model="clickedUser.role">{{clickedUser.role}}</option>
+          <option ng-repeat="role in roleDetails2">{{role.rolename}}</option> 
+  </select>
+  
+  <select ng-if="clickedUser.role == 'admin'">
+      <option type="text" class="form-control" ng-value="newRole" ng-model="clickedUser.role">{{clickedUser.role}}</option>
+          <option ng-repeat="role in roleDetails3">{{role.rolename}}</option> 
+  </select> -->
+                <select ng-model="clickedUser.role">
+                  <option value="ordinary">Ordinary</option>
+                  <option value="super">Super User</option>
+                  <option value="admin">Admin</option>
+                  <!-- <option value="" selected></option> -->
+                  <!-- <option ng-if="clickedUser.role =='ordinary'" ng-repeat="role in roleDetails1">{{role.rolename}}</option> 
+      <option ng-if="clickedUser.role =='investor'" ng-repeat="role in roleDetails2">{{role.rolename}}</option> 
+      <option ng-if="clickedUser.role =='admin'" ng-repeat="role in roleDetails3">{{role.rolename}}</option>  -->
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn btn-info"
+              data-dismiss="modal"
+              ng-click="updateUser()"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              class="btn btn btn-danger"
+              data-dismiss="modal"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModalDelete" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Are you sure?</h4>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>
+              You want to delete
+              <strong style="color: red">{{clickedUser.username}}'s</strong>
+              information...
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-dismiss="modal"
+              ng-click="deleteUser()"
+            >
+              Yes
+            </button>
+            <button type="button" class="btn btn-info" data-dismiss="modal">
+              No
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit User</h4>
+          <button type="button" ng-click="close()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="">Username</label>
+            <div class="">
+              <input
+                type="text"
+                class="form-control"
+                ng-value="newUsername"
+                ng-model="clickedUser.username"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="">Email</label>
+            <div class="0">
+              <input
+                type="text"
+                class="form-control"
+                ng-value="newEmail"
+                ng-model="clickedUser.email"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="">Role</label>
+            <div class="">
+              <select ng-model="clickedUser.role">
+                <option value="ordinary">Ordinary</option>
+                <option value="super">Super User</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn btn-info"
+            data-dismiss="modal"
+            ng-click="updateUser()"
+          >
+            Save
+          </button>
+          <button type="button" class="btn btn btn-danger" ng-click="close()">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal2" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Are you sure?</h4>
+          <button type="button" ng-click="close2()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>
+            You want to delete
+            <strong style="color: red">{{clickedUser.username}}'s</strong>
+            information...
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" ng-click="deleteUser()">
+            Yes
+          </button>
+          <button type="button" class="btn btn-info" ng-click="close2()">
+            No
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="myModal3" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add User</h4>
+          <button type="button" ng-click="close3()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="">First Name</label>
+            <div class="">
+              <input
+                type="text"
+                class="form-control"
+                ng-value="newUsername"
+                ng-model="clickedUser.username"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="">Middle Name</label>
+            <div class="">
+              <input
+                type="text"
+                class="form-control"
+                ng-value="newUsername"
+                ng-model="clickedUser.username"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="">Last Name</label>
+            <div class="">
+              <input
+                type="text"
+                class="form-control"
+                ng-value="newUsername"
+                ng-model="clickedUser.username"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="">Email</label>
+            <div class="0">
+              <input
+                type="text"
+                class="form-control"
+                ng-value="newEmail"
+                ng-model="clickedUser.email"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="">Role</label>
+            <div class="">
+              <select ng-model="clickedUser.role">
+                <option value="ordinary">Ordinary</option>
+                <option value="super">Super User</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn btn-info"
+            data-dismiss="modal"
+            ng-click="updateUser()"
+          >
+            Save
+          </button>
+          <button type="button" class="btn btn btn-danger" ng-click="close()">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="myModal11" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add Subjects</h4>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="errorMessage" style="color: red"></div>
+            <!-- <p style="display: none" id="error">
+                <i style="color: red"
+                  >&nbsp;&nbsp; Error: All fields are required!</i
+                >
+              </p> -->
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="code">Course Code</label>
+                <input
+                  class="form-control"
+                  ng-model="code"
+                  id="code"
+                  autocomplete="off"
+                  type="text"
+                  placeholder="ACT-C 101"
+                  required=""
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="title">Course Title</label>
+                <input
+                  class="form-control"
+                  ng-model="title"
+                  id="title"
+                  type="text"
+                  autocomplete="off"
+                  placeholder="Introduction to Computing"
+                  required=""
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <label for="lecUnits">Lec Unit(s)</label>
+                <input
+                  class="form-control"
+                  ng-model="lecUnits"
+                  id="lecUnits"
+                  type="number"
+                  autocomplete="off"
+                  placeholder="0"
+                  required=""
+                />
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="labUnits">Lab Units(s)</label>
+                <input
+                  class="form-control"
+                  ng-model="labUnits"
+                  id="labUnits"
+                  type="number"
+                  autocomplete="off"
+                  placeholder="0"
+                  required=""
+                />
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="units">Unit(s)</label>
+                <input
+                  class="form-control"
+                  ng-model="units"
+                  id="units"
+                  type="number"
+                  autocomplete="off"
+                  placeholder="0"
+                  required=""
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 mb-3">
+                <label for="preRequisited">Pre-Requisited</label>
+                <input
+                  class="form-control"
+                  ng-model="preRequisited"
+                  id="preRequisited"
+                  type="text"
+                  autocomplete="off"
+                  placeholder="ACT-C 101"
+                  required=""
+                />
+              </div>
+            </div>
+
+            <!-- <p>
+                    <i style="color: red"
+                      >&nbsp;&nbsp; Note: All fields are required. Just put 0 if
+                      there's no input</i
+                    >
+                  </p> -->
+            <!-- </div> -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Cancel
+            </button>
+            <button type="button" class="btn btn-success" ng-click="addData()">
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="myModal12" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Edit Subject</h4>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="code">Course Code</label>
+                <input
+                  class="form-control"
+                  ng-model="clickedUser.code"
+                  id="edit_code"
+                  autocomplete="off"
+                  type="text"
+                  placeholder="ACT-C 101"
+                  required=""
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="title">Course Title</label>
+                <input
+                  class="form-control"
+                  ng-model="clickedUser.title"
+                  id="edit_title"
+                  type="text"
+                  autocomplete="off"
+                  placeholder="Gonzales"
+                  required=""
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <label for="lecUnits">Lec Unit(s)</label>
+                <input
+                  class="form-control"
+                  ng-model="clickedUser.lecUnits"
+                  id="edit_lecUnits"
+                  type="number"
+                  autocomplete="off"
+                  placeholder="0"
+                  required=""
+                />
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="labUnits">Lab Units(s)</label>
+                <input
+                  class="form-control"
+                  ng-model="clickedUser.labUnits"
+                  id="edit_labUnits"
+                  type="number"
+                  autocomplete="off"
+                  placeholder="0"
+                  required=""
+                />
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="units">Unit(s)</label>
+                <input
+                  class="form-control"
+                  ng-model="clickedUser.units"
+                  id="edit_units"
+                  type="number"
+                  autocomplete="off"
+                  placeholder="0"
+                  required=""
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 mb-3">
+                <label for="preRequisited">Pre-Requisited</label>
+                <input
+                  class="form-control"
+                  ng-model="clickedUser.preRequisited"
+                  id="edit_preRequisited"
+                  type="text"
+                  autocomplete="off"
+                  placeholder="ACT-C 101"
+                  required=""
+                />
+              </div>
+            </div>
+
+            <!-- <p>
+                      <i style="color: red"
+                        >&nbsp;&nbsp; Note: All fields are required. Just put 0 if
+                        there's no input</i
+                      >
+                    </p> -->
+            <!-- </div> -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-success"
+              ng-click="updateData()"
+            >
+              Update
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="myModal13" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Are you sure?</h4>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>
+              You want to delete
+              <strong style="color: red">{{clickedUser.code}}'s</strong>
+              information...
+            </p>
+          </div>
+          <div class="modal-footer">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-info" data-dismiss="modal">
+                No
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger"
+                ng-click="deleteUser()"
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
