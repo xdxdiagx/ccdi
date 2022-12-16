@@ -55,6 +55,14 @@ angular
                 templateUrl: 'views/Course.html',
                 controller: 'CourseCtrl'
             })
+            .when('/Blocks', {
+                templateUrl: 'views/Block.html',
+                controller: 'BlockCtrl'
+            })
+            .when('/MySubjects', {
+                templateUrl: 'views/MySubjects.html',
+                controller: 'MySubjectsCtrl'
+            })
             .when('/Settings', {
                 templateUrl: 'views/Settings.html',
                 controller: 'SettingsCtrl'

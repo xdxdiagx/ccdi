@@ -21,6 +21,52 @@ angular.module('newApp').controller('DashboardCtrl', function ($scope) {
         $scope.cmdCurrent = 0;
         $scope.churchesCurrent = 0;
 
+        $scope.faculty = [];
+        $scope.students = [];
+        $scope.subjects = [];
+
+        firebase.database().ref("users").orderByChild("role").equalTo("student").once('value', function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+                console.log(childSnapshot.val());
+                // var childKey = childSnapshot.key();
+                var childData = childSnapshot.val();
+                $scope.students.push(childSnapshot.val());
+                // console.log($scope.students);
+
+
+            })
+            document.getElementById('students').innerHTML = $scope.students.length;
+
+        });
+
+        firebase.database().ref("users").orderByChild("role").equalTo("faculty").once('value', function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+                console.log(childSnapshot.val());
+                // var childKey = childSnapshot.key();
+                var childData = childSnapshot.val();
+                $scope.faculty.push(childSnapshot.val());
+                console.log($scope.faculty);
+
+
+            })
+            document.getElementById('faculty').innerHTML = $scope.faculty.length;
+
+        });
+
+        firebase.database().ref("subjects").once('value', function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+                console.log(childSnapshot.val());
+                // var childKey = childSnapshot.key();
+                var childData = childSnapshot.val();
+                $scope.subjects.push(childSnapshot.val());
+                // console.log($scope.students);
+
+
+            })
+            document.getElementById('subjects').innerHTML = $scope.subjects.length;
+
+        });
+
         // $scope.mYear = function () {
         //     // var payment = document.getElementById("payment");
         //     var mYear = $('#mYear').val();

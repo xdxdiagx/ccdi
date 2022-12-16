@@ -118,6 +118,7 @@
           if (firebase.auth().currentUser.displayName == null) {
             document.getElementById("username").innerHTML =
               firebase.auth().currentUser.email;
+            localStorage.setItem("email", firebase.auth().currentUser.email);
           } else {
             document.getElementById("username").innerHTML =
               firebase.auth().currentUser.displayName;
@@ -405,7 +406,7 @@
                 class="nav-item has-treeview"
                 id="mysubjects"
               >
-                <a href="#/mysubjects" class="nav-link">
+                <a href="#/MySubjects" class="nav-link">
                   <i class="nav-icon far fa-address-book"></i>
                   <p>My Subjects</p>
                 </a>
@@ -415,7 +416,7 @@
                 class="nav-item has-treeview"
                 id="myprofile"
               >
-                <a href="#/myprofile" class="nav-link">
+                <a href="#/profile" class="nav-link">
                   <i class="nav-icon far fa-id-card"></i>
                   <p>Profile</p>
                 </a>
@@ -515,7 +516,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#/Block" class="nav-link">
+                    <a href="#/Blocks" class="nav-link">
                       <i class="nav-icon fas fa-chalkboard-teacher"></i>
                       <p>Block</p>
                     </a>
@@ -598,10 +599,46 @@
     <script src="controllers/SettingsCtrl.js"></script>
     <script src="controllers/SubjectCtrl.js"></script>
     <script src="controllers/CourseCtrl.js"></script>
+    <script src="controllers/BlockCtrl.js"></script>
+    <script src="controllers/MySubjectsCtrl.js"></script>
     <script src="controllers/ReportSettingsCtrl.js"></script>
 
     <script>
       var developer = "Carl Jason Lignes";
+
+      var ref = firebase.database().ref("block");
+      var key = localStorage.getItem("key");
+      // var userVerify = firebase.auth().currentUser;
+      // localStorage.setItem("email", userVerify.email);
+
+      if (!key) {
+        const random = (length = 8) => {
+          // Declare all characters
+          let chars =
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+          // Pick characers randomly
+          let str = "";
+          for (let i = 0; i < length; i++) {
+            str += chars.charAt(Math.floor(Math.random() * chars.length));
+          }
+
+          return str;
+        };
+        localStorage.setItem("key", random(20));
+        // ref
+        //   .push({
+        //     blockname: "",
+        //   })
+        //   .then(function (ref) {
+        //     console.log(ref.key);
+        //     ref.update({
+        //       key: ref.key,
+        //     });
+        //     localStorage.setItem("key", ref.key);
+        //     console.log("Added to database");
+        //   });
+      }
 
       function signout() {
         window.localStorage.removeItem("username");
