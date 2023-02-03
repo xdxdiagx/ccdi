@@ -25,8 +25,8 @@ angular.module('newApp').controller('BlockCtrl', function ($firebaseArray, $scop
 
         for (var i = 0; i < $scope.faculty.length; i++) {
             var opt = document.createElement('option');
-            opt.value = $scope.faculty[i].email;
-            opt.innerHTML = $scope.faculty[i].email;
+            opt.value = $scope.faculty[i].key;
+            opt.innerHTML = $scope.faculty[i].firstName + " " + $scope.faculty[i].lastName + " (" + $scope.faculty[i].email + ")";
             select.appendChild(opt);
         }
         console.log(snapshot.val());
@@ -88,9 +88,58 @@ angular.module('newApp').controller('BlockCtrl', function ($firebaseArray, $scop
                 // var childKey = childSnapshot.key();
                 var childData = childSnapshot.val();
                 // $scope.students.push(childSnapshot.val());
-                // console.log($scope.students);
+                console.log($scope.students);
+                console.log($scope.faculty);
                 var key = localStorage.getItem('key');
+                var ref2 = firebase.database().ref('users/' + $scope.students + "/subjects");
+                var refFaculty = firebase.database().ref('users/' + $scope.faculty + "/subjects");
                 if (key) {
+                    ref2.child(key).update({
+                            blockname: $scope.blockName,
+                            faculty: $scope.faculty,
+                            schoolYear: $scope.schoolYear,
+                            subject: $scope.subject,
+                            prelim: '',
+                            midterm: '',
+                            prefinal: '',
+                            final: '',
+                            key: key
+                        })
+                        .then(function (ref) {
+                            // console.log(ref.key);
+                            // ref.update({
+                            //     key: ref.key,
+                            // })
+                            // localStorage.setItem("key", ref.key);
+                            // var ref3 = firebase.database().ref('users/' + $scope.students + "/subjects/" + key + "/students");
+                            // ref3.push({
+                            //         firstName: childSnapshot.val().firstName,
+                            //         middleName: childSnapshot.val().middleName,
+                            //         lastName: childSnapshot.val().lastName,
+                            //         email: childSnapshot.val().email,
+                            //         year: childSnapshot.val().year,
+                            //         course: childSnapshot.val().course,
+                            //         prelim: '',
+                            //         midterm: '',
+                            //         prefinal: '',
+                            //         final: '',
+                            //         key: key
+                            //     })
+                            //     .then(function (ref) {
+                            //         ref3.child(ref.key).update({
+                            //             studentKey: ref.key,
+                            //         })
+                            //     });
+                            // $("#myModal11").modal("hide");
+                            // document.getElementById("code").innerHTML = " ";
+                            // document.getElementById("title").innerHTML = " ";
+                            // document.getElementById("years").innerHTML = " ";
+
+                            console.log('Added to database');
+                        });
+
+
+
                     ref.child(key).update({
                             blockname: $scope.blockName,
                             faculty: $scope.faculty,
@@ -363,6 +412,7 @@ angular.module('newApp').controller('BlockCtrl', function ($firebaseArray, $scop
     $scope.deleteUser = function () {
         var ref = firebase.database().ref("subjects/" + id.$id);
         ref.remove();
+        console.log(ref.remove());
         $("#myModal13").modal("hide");
         // modal2.style.display = "none";
     };

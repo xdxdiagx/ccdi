@@ -102,133 +102,168 @@
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
       // firebase.analytics();
+
+      // var user_role = localStorage.getItem("role");
+      // var email = localStorage.getItem("email");
+      // var user_key = localStorage.getItem("user_key");
+      // var display_name = localStorage.getItem("display_name");
+
+      // if (email) {
+      //   // document.getElementById("photoURL").src =
+      //   //   "assets/libraries/dist/img/user2-160x160.jpg";
+      //   document.getElementById("username").innerHTML = email;
+      //   // document.getElementById("username").innerHTML = display_name;
+      //   if (user_role == "admin" || user_role == "registrar") {
+      //     $("#mysubjects").show();
+      //     $("#myprofile").show();
+      //     $("#dashboard").show();
+      //     $("#settings").show();
+      //   } else if (user_role == "faculty") {
+      //     $("#mysubjects").show();
+      //     $("#myprofile").show();
+      //     $("#dashboard").show();
+      //   } else if (user_role == "student") {
+      //     $("#mysubjects").show();
+      //     $("#myprofile").show();
+      //   }
+      // } else {
+      //   window.location.href = "./login.html";
+      // }
+
       var ref = firebase.database().ref("/users");
-      firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-          console.log(user);
-          var temp = firebase.auth().currentUser.photoURL;
-          // console.log(firebase.auth().currentUser.photoURL);
-          // console.log(firebase.auth().currentUser.displayName);
-          if (temp == null) {
-            document.getElementById("photoURL").src =
-              "assets/libraries/dist/img/user2-160x160.jpg";
-          } else {
-            document.getElementById("photoURL").src = temp;
-          }
-          if (firebase.auth().currentUser.displayName == null) {
-            document.getElementById("username").innerHTML =
-              firebase.auth().currentUser.email;
-            localStorage.setItem("email", firebase.auth().currentUser.email);
-          } else {
-            document.getElementById("username").innerHTML =
-              firebase.auth().currentUser.displayName;
-          }
+      // firebase.auth().onAuthStateChanged(function (user) {
+      //   if (user) {
+      //     console.log(user);
+      //     var temp = firebase.auth().currentUser.photoURL;
+      //     // console.log(firebase.auth().currentUser.photoURL);
+      //     // console.log(firebase.auth().currentUser.displayName);
+      //     if (temp == null) {
+      //       document.getElementById("photoURL").src =
+      //         "assets/libraries/dist/img/user2-160x160.jpg";
+      //     } else {
+      //       document.getElementById("photoURL").src = temp;
+      //     }
+      //     if (firebase.auth().currentUser.displayName == null) {
+      //       document.getElementById("username").innerHTML =
+      //         firebase.auth().currentUser.email;
+      //       localStorage.setItem("email", firebase.auth().currentUser.email);
+      //     } else {
+      //       document.getElementById("username").innerHTML =
+      //         firebase.auth().currentUser.displayName;
+      //     }
 
-          $("#mysubjects").show();
-          $("#myprofile").show();
-          // $("#sr").show();
-          // $("#jf").show();
-          // $("#gcmm").show();
-          // $("#r8").show();
-          // $("#reports").show();
-          $("#settings").show();
+      //     var user_role = localStorage.getItem("role");
 
-          // var role = sessionStorage.getItem("role");
+      //     $("#mysubjects").show();
+      //     // $("#dashboard").show();
+      //     $("#myprofile").show();
+      //     // $("#sr").show();
+      //     // $("#jf").show();
+      //     // $("#gcmm").show();
+      //     // $("#r8").show();
+      //     // $("#reports").show();
 
-          // if (role == 'admin') {
-          //     $("#aia").show();
-          //     $("#gan").show();
-          //     $("#sr").show();
-          //     $("#jf").show();
-          //     $("#gcmm").show();
-          //     $("#r8").show();
-          //     $("#reports").show();
-          //     $("#settings").show();
-          //     // $("#ai").hide();
-          //     // $("#logs").hide();
-          //     // $("#settings").hide();
-          // } else if (role == 'encoder') {
-          //     $("#aia").show();
-          //     $("#gan").show();
-          //     $("#sr").show();
-          //     $("#jf").show();
-          //     $("#gcmm").show();
-          //     $("#r8").show();
-          //     // $("#settings").show();
-          //     // $("#settings").hide();
-          // }
+      //     if (user_role == "admin" || user_role == "faculty") {
+      //       $("#dashboard").show();
+      //       $("#settings").show();
+      //     }
 
-          var userVerify = firebase.auth().currentUser;
-          // ref
-          //   .orderByChild("role")
-          //   .once("value")
-          //   .then(function (snapshot) {
-          //     var exist = snapshot.exists();
-          //     var UID = firebase.auth().currentUser.uid;
-          //     var role = snapshot.child(UID).child("role").val();
-          //     // console.log(UID);
-          //     // console.log(snapshot.val());
-          //     // console.log(role);
-          //     if (role == "admin") {
-          //       $("#aia").show();
-          //       $("#gan").show();
-          //       $("#sr").show();
-          //       $("#jf").show();
-          //       $("#gcmm").show();
-          //       $("#r8").show();
-          //       $("#reports").show();
-          //       $("#settings").show();
-          //     } else if (role == "aia") {
-          //       $("#aia").show();
-          //       // $("#gan").show();
-          //       // $("#sr").show();
-          //       // $("#jf").show();
-          //       // $("#gcmm").show();
-          //       // $("#r8").show();
-          //     } else if (role == "gan") {
-          //       // $("#aia").show();
-          //       $("#gan").show();
-          //       // $("#sr").show();
-          //       // $("#jf").show();
-          //       // $("#gcmm").show();
-          //       // $("#r8").show();
-          //     } else if (role == "sr") {
-          //       // $("#aia").show();
-          //       // $("#gan").show();
-          //       $("#sr").show();
-          //       // $("#jf").show();
-          //       // $("#gcmm").show();
-          //       // $("#r8").show();
-          //     } else if (role == "jf") {
-          //       // $("#aia").show();
-          //       // $("#gan").show();
-          //       // $("#sr").show();
-          //       $("#jf").show();
-          //       // $("#gcmm").show();
-          //       // $("#r8").show();
-          //     } else if (role == "gcmm") {
-          //       // $("#aia").show();
-          //       // $("#gan").show();
-          //       // $("#sr").show();
-          //       // $("#jf").show();
-          //       $("#gcmm").show();
-          //       // $("#r8").show();
-          //     } else if (role == "r8") {
-          //       // $("#aia").show();
-          //       // $("#gan").show();
-          //       // $("#sr").show();
-          //       // $("#jf").show();
-          //       // $("#gcmm").show();
-          //       $("#r8").show();
-          //     }
-          // });
-        } else {
-          // console.log("login");
-          // console.log(window.location.pathname);
-          // window.location.pathname = './login.html';
-          window.location.href = "./login.html";
-        }
-      });
+      //     // var role = sessionStorage.getItem("role");
+
+      //     // if (role == 'admin') {
+      //     //     $("#aia").show();
+      //     //     $("#gan").show();
+      //     //     $("#sr").show();
+      //     //     $("#jf").show();
+      //     //     $("#gcmm").show();
+      //     //     $("#r8").show();
+      //     //     $("#reports").show();
+      //     //     $("#settings").show();
+      //     //     // $("#ai").hide();
+      //     //     // $("#logs").hide();
+      //     //     // $("#settings").hide();
+      //     // } else if (role == 'encoder') {
+      //     //     $("#aia").show();
+      //     //     $("#gan").show();
+      //     //     $("#sr").show();
+      //     //     $("#jf").show();
+      //     //     $("#gcmm").show();
+      //     //     $("#r8").show();
+      //     //     // $("#settings").show();
+      //     //     // $("#settings").hide();
+      //     // }
+
+      //     var userVerify = firebase.auth().currentUser;
+      //     // ref
+      //     //   .orderByChild("role")
+      //     //   .once("value")
+      //     //   .then(function (snapshot) {
+      //     //     var exist = snapshot.exists();
+      //     //     var UID = firebase.auth().currentUser.uid;
+      //     //     var role = snapshot.child(UID).child("role").val();
+      //     //     // console.log(UID);
+      //     //     // console.log(snapshot.val());
+      //     //     // console.log(role);
+      //     //     if (role == "admin") {
+      //     //       $("#aia").show();
+      //     //       $("#gan").show();
+      //     //       $("#sr").show();
+      //     //       $("#jf").show();
+      //     //       $("#gcmm").show();
+      //     //       $("#r8").show();
+      //     //       $("#reports").show();
+      //     //       $("#settings").show();
+      //     //     } else if (role == "aia") {
+      //     //       $("#aia").show();
+      //     //       // $("#gan").show();
+      //     //       // $("#sr").show();
+      //     //       // $("#jf").show();
+      //     //       // $("#gcmm").show();
+      //     //       // $("#r8").show();
+      //     //     } else if (role == "gan") {
+      //     //       // $("#aia").show();
+      //     //       $("#gan").show();
+      //     //       // $("#sr").show();
+      //     //       // $("#jf").show();
+      //     //       // $("#gcmm").show();
+      //     //       // $("#r8").show();
+      //     //     } else if (role == "sr") {
+      //     //       // $("#aia").show();
+      //     //       // $("#gan").show();
+      //     //       $("#sr").show();
+      //     //       // $("#jf").show();
+      //     //       // $("#gcmm").show();
+      //     //       // $("#r8").show();
+      //     //     } else if (role == "jf") {
+      //     //       // $("#aia").show();
+      //     //       // $("#gan").show();
+      //     //       // $("#sr").show();
+      //     //       $("#jf").show();
+      //     //       // $("#gcmm").show();
+      //     //       // $("#r8").show();
+      //     //     } else if (role == "gcmm") {
+      //     //       // $("#aia").show();
+      //     //       // $("#gan").show();
+      //     //       // $("#sr").show();
+      //     //       // $("#jf").show();
+      //     //       $("#gcmm").show();
+      //     //       // $("#r8").show();
+      //     //     } else if (role == "r8") {
+      //     //       // $("#aia").show();
+      //     //       // $("#gan").show();
+      //     //       // $("#sr").show();
+      //     //       // $("#jf").show();
+      //     //       // $("#gcmm").show();
+      //     //       $("#r8").show();
+      //     //     }
+      //     // });
+      //   } else {
+      //     // console.log("login");
+      //     // console.log(window.location.pathname);
+      //     // window.location.pathname = './login.html';
+      //     window.location.href = "./login.html";
+      //   }
+      // });
     </script>
   </head>
 
@@ -339,8 +374,12 @@
             >
               <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-              <li class="nav-item has-treeview menu-open">
-                <a href="#/" class="nav-link active">
+              <li
+                style="display: none"
+                class="nav-item has-treeview menu-open"
+                id="dashboard"
+              >
+                <a href="#/Dashboard" class="nav-link active">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>Dashboard</p>
                 </a>
@@ -610,6 +649,32 @@
       var key = localStorage.getItem("key");
       // var userVerify = firebase.auth().currentUser;
       // localStorage.setItem("email", userVerify.email);
+      var user_role = localStorage.getItem("role");
+      var email = localStorage.getItem("email");
+      var user_key = localStorage.getItem("user_key");
+      var display_name = localStorage.getItem("display_name");
+
+      if (email) {
+        // document.getElementById("photoURL").src =
+        //   "assets/libraries/dist/img/user2-160x160.jpg";
+        // document.getElementById("username").innerHTML = email;
+        document.getElementById("username").innerHTML = display_name;
+        if (user_role == "admin" || user_role == "registrar") {
+          $("#mysubjects").show();
+          $("#myprofile").show();
+          $("#dashboard").show();
+          $("#settings").show();
+        } else if (user_role == "faculty") {
+          $("#mysubjects").show();
+          $("#myprofile").show();
+          $("#dashboard").show();
+        } else if (user_role == "student") {
+          $("#mysubjects").show();
+          $("#myprofile").show();
+        }
+      } else {
+        window.location.href = "./login.html";
+      }
 
       if (!key) {
         const random = (length = 8) => {
@@ -640,8 +705,56 @@
         //   });
       }
 
+      var email = localStorage.getItem("email");
+      if (email) {
+        firebase
+          .database()
+          .ref("users")
+          .orderByChild("email")
+          .equalTo(email)
+          .once("value", function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+              console.log(childSnapshot.val());
+              // var childKey = childSnapshot.key();
+              var childData = childSnapshot.val();
+              localStorage.setItem("user_key", childData.key);
+              localStorage.setItem("role", childData.role);
+              // $scope.students.push(childSnapshot.val());
+              // console.log($scope.students);
+            });
+            // var select = document.getElementById('students');
+
+            // for (var i = 0; i < $scope.students.length; i++) {
+            //     var opt = document.createElement('option');
+            //     opt.value = $scope.students[i].key;
+            //     opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
+            //     select.appendChild(opt);
+            // }
+            var user_role = localStorage.getItem("role");
+
+            if (user_role == "admin") {
+              $("#dashboard").show();
+              $("#settings").show();
+            }
+            console.log(snapshot.val());
+          });
+      } else {
+        setTimeout(() => {
+          var user_role = localStorage.getItem("role");
+
+          if (user_role == "admin") {
+            $("#settings").show();
+          }
+          window.location.reload();
+        }, 1000);
+      }
+
       function signout() {
+        window.localStorage.removeItem("email");
         window.localStorage.removeItem("username");
+        window.localStorage.removeItem("user_key");
+        window.localStorage.removeItem("role");
+        window.localStorage.removeItem("display_name");
         firebase
           .auth()
           .signOut()

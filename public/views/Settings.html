@@ -122,7 +122,24 @@
     >
       Add User
     </button>
-    <br />
+
+    <div class="col-sm-4">
+      <!-- <h3 class="m-0 text-dark">Athletes In Action</h3> -->
+      <label for="show_user">Show User</label>
+      <select
+        class="custom-select form-control"
+        id="showUser"
+        ng-model="showUser"
+        ng-change="show_user()"
+      >
+        <!-- <option value="select" selected>Select</option> -->
+        <option value="student">Student</option>
+        <option value="faculty">Faculty</option>
+        <option value="registrar">Registrar</option>
+        <option value="admin">Admin</option>
+      </select>
+    </div>
+
     <br />
 
     <table class="table table-bordered table-hover bg-white-only">
@@ -137,9 +154,9 @@
                 <td style="width:20%">Gender</td> -->
           <!-- <td style="width:35%">Address</td>
             <td style="width:25%">Number</td> -->
+          <td style="width: 20%">Roles</td>
           <td style="width: 20%">Year</td>
           <td style="width: 20%">Course</td>
-          <td style="width: 20%">Roles</td>
           <td style="width: 20%">Actions</td>
         </tr>
       </thead>
@@ -518,7 +535,7 @@
     </div>
 
     <div class="modal fade" id="myModal11" role="dialog">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-lg">
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
@@ -629,7 +646,7 @@
                   <option value="2">2nd Year</option>
                   <option value="3">3rd Year</option>
                   <option value="4">4th Year</option>
-                  <option value="5">5th Year</option>
+                  <!-- <option value="5">5th Year</option> -->
                 </select>
               </div>
               <div class="col-md-6 mb-3">
@@ -640,9 +657,24 @@
                   ng-change="course()"
                   ng-model="course"
                 >
-                  <option value="IT">BSIT</option>
-                  <option value="CS">BSCS</option>
-                  <option value="IS">BSIS</option>
+                  <option value="Multimedia">
+                    Associate Computer Technology (Multimedia)
+                  </option>
+                  <option value="Networking">
+                    Associate Computer Technology (Networking)
+                  </option>
+                  <option value="BSOA">
+                    Bachelor of Science in Office Administration
+                  </option>
+                  <option value="BSIS">
+                    Bachelor of Science in Information System
+                  </option>
+                  <option value="BSIT">
+                    Bachelor of Science in Information Technology
+                  </option>
+                  <option value="BSCS">
+                    Bachelor of Science in Computer Science
+                  </option>
                   <!-- <option value="student">Student</option> -->
                 </select>
               </div>
@@ -759,7 +791,7 @@
                   <option value="2">2nd Year</option>
                   <option value="3">3rd Year</option>
                   <option value="4">4th Year</option>
-                  <option value="5">5th Year</option>
+                  <!-- <option value="5">5th Year</option> -->
                 </select>
               </div>
               <div class="col-md-6 mb-3">
@@ -770,9 +802,24 @@
                   ng-change="course()"
                   ng-model="clickedUser.course"
                 >
-                  <option value="IT">BSIT</option>
-                  <option value="CS">BSCS</option>
-                  <option value="IS">BSIS</option>
+                  <option value="Multimedia">
+                    Associate Computer Technology (Multimedia)
+                  </option>
+                  <option value="Networking">
+                    Associate Computer Technology (Networking)
+                  </option>
+                  <option value="BSOA">
+                    Bachelor of Science in Office Administration
+                  </option>
+                  <option value="BSIS">
+                    Bachelor of Science in Information System
+                  </option>
+                  <option value="BSIT">
+                    Bachelor of Science in Information Technology
+                  </option>
+                  <option value="BSCS">
+                    Bachelor of Science in Computer Science
+                  </option>
                   <!-- <option value="student">Student</option> -->
                 </select>
               </div>

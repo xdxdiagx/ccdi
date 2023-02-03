@@ -4,6 +4,14 @@
 angular.module('newApp').controller('SettingsCtrl', function ($firebaseArray, $scope) {
 
     // console.log("Settings");
+    var loc = window.location.hash;
+    var res = loc.split("#");
+    var url = res[0]
+    var params = res[1]
+    console.log(res.length);
+    if (res.length == 3) {
+        window.location.hash = '#/Dashboard#2'
+    }
 
     // Get the modal
     var modal = document.getElementById('myModal12');
@@ -75,52 +83,79 @@ angular.module('newApp').controller('SettingsCtrl', function ($firebaseArray, $s
         if (firstName && middleName && lastName && email && password && userRole) {
             if (userRole == "student") {
                 if (year && course) {
-                    firebase.auth().createUserWithEmailAndPassword(email, password)
-                        .then(function (user) {
-                            console.log(user.uid);
-                            var uid = user.uid
-                            ref.push({
-                                    firstName: firstName,
-                                    middleName: middleName,
-                                    lastName: lastName,
-                                    email: email,
-                                    password: password,
-                                    role: userRole,
-                                    year: year,
-                                    course: course,
-                                })
-                                .then(function (ref) {
-                                    console.log(ref.key);
-                                    ref.update({
-                                        key: ref.key
-                                    })
+                    ref.push({
+                            firstName: firstName,
+                            middleName: middleName,
+                            lastName: lastName,
+                            email: email,
+                            password: password,
+                            role: userRole,
+                            year: year,
+                            course: course,
+                        })
+                        .then(function (ref) {
+                            console.log(ref.key);
+                            ref.update({
+                                key: ref.key
+                            })
 
-                                    $("#myModal11").modal("hide");
-                                    document.getElementById("firstName").innerHTML = "";
-                                    document.getElementById("middleName").innerHTML = "";
-                                    document.getElementById("lastName").innerHTML = "";
-                                    document.getElementById("email").innerHTML = "";
-                                    document.getElementById("password").innerHTML = "";
-                                    document.getElementById("userRole").innerHTML = "";
-                                    document.getElementById("year").innerHTML = "";
-                                    document.getElementById("course").innerHTML = "";
-                                    console.log('Added to database');
-                                });
-                            // document.getElementById("username").innerHTML = " ";
-                            // document.getElementById("email").innerHTML = " ";
-                            // document.getElementById("password").innerHTML = " ";
-                            // window.location.href = './index.html';
-                            // username = "";
-                            // email = "";
-                            // password = "";
-                        }).catch(function (error) {
-                            console.log(error.code);
-                            console.log(error.message);
-                            document.getElementById("errorMessage").innerText = error.message;
-                            setTimeout(() => {
-                                document.getElementById("errorMessage").innerText = '';
-                            }, 3000);
+                            $("#myModal11").modal("hide");
+                            document.getElementById("firstName").innerHTML = "";
+                            document.getElementById("middleName").innerHTML = "";
+                            document.getElementById("lastName").innerHTML = "";
+                            document.getElementById("email").innerHTML = "";
+                            document.getElementById("password").innerHTML = "";
+                            document.getElementById("userRole").innerHTML = "";
+                            document.getElementById("year").innerHTML = "";
+                            document.getElementById("course").innerHTML = "";
+                            console.log('Added to database');
                         });
+                    // firebase.auth().createUserWithEmailAndPassword(email, password)
+                    //     .then(function (user) {
+                    //         console.log(user.uid);
+                    //         var uid = user.uid
+                    //         ref.push({
+                    //                 firstName: firstName,
+                    //                 middleName: middleName,
+                    //                 lastName: lastName,
+                    //                 email: email,
+                    //                 password: password,
+                    //                 role: userRole,
+                    //                 year: year,
+                    //                 course: course,
+                    //             })
+                    //             .then(function (ref) {
+                    //                 console.log(ref.key);
+                    //                 ref.update({
+                    //                     key: ref.key
+                    //                 })
+
+                    //                 $("#myModal11").modal("hide");
+                    //                 document.getElementById("firstName").innerHTML = "";
+                    //                 document.getElementById("middleName").innerHTML = "";
+                    //                 document.getElementById("lastName").innerHTML = "";
+                    //                 document.getElementById("email").innerHTML = "";
+                    //                 document.getElementById("password").innerHTML = "";
+                    //                 document.getElementById("userRole").innerHTML = "";
+                    //                 document.getElementById("year").innerHTML = "";
+                    //                 document.getElementById("course").innerHTML = "";
+                    //                 console.log('Added to database');
+                    //             });
+                    //         // document.getElementById("username").innerHTML = " ";
+                    //         // document.getElementById("email").innerHTML = " ";
+                    //         // document.getElementById("password").innerHTML = " ";
+                    //         // window.location.href = './index.html';
+                    //         // username = "";
+                    //         // email = "";
+                    //         // password = "";
+                    //     }).catch(function (error) {
+                    //         console.log(error.code);
+                    //         console.log(error.message);
+                    //         document.getElementById("errorMessage").innerText = error.message;
+                    //         setTimeout(() => {
+                    //             document.getElementById("errorMessage").innerText = '';
+                    //         }, 3000);
+                    //     });
                 } else {
                     // console.log("error");
                     // $('#error').show();
@@ -130,49 +165,72 @@ angular.module('newApp').controller('SettingsCtrl', function ($firebaseArray, $s
                     }, 3000);
                 }
             } else {
-                firebase.auth().createUserWithEmailAndPassword(email, password)
-                    .then(function (user) {
-                        console.log(user.uid);
-                        var uid = user.uid;
-                        ref.push({
-                                firstName: firstName,
-                                middleName: middleName,
-                                lastName: lastName,
-                                email: email,
-                                password: password,
-                                role: userRole,
-                            })
-                            .then(function (ref) {
-                                console.log(ref.key);
-                                ref.update({
-                                    key: ref.key
-                                })
+                ref.push({
+                        firstName: firstName,
+                        middleName: middleName,
+                        lastName: lastName,
+                        email: email,
+                        password: password,
+                        role: userRole,
+                    })
+                    .then(function (ref) {
+                        console.log(ref.key);
+                        ref.update({
+                            key: ref.key
+                        })
 
-                                $("#myModal11").modal("hide");
-                                document.getElementById("firstName").innerHTML = "";
-                                document.getElementById("middleName").innerHTML = "";
-                                document.getElementById("lastName").innerHTML = "";
-                                document.getElementById("email").innerHTML = "";
-                                document.getElementById("password").innerHTML = "";
-                                document.getElementById("userRole").innerHTML = "";
-                                console.log('Added to database');
-                            });
-                        // document.getElementById("username").innerHTML = " ";
-                        // document.getElementById("email").innerHTML = " ";
-                        // document.getElementById("password").innerHTML = " ";
-                        // window.location.href = './index.html';
-                        // username = "";
-                        // email = "";
-                        // password = "";
-                    }).catch(function (error) {
-                        console.log(error.code);
-                        console.log(error.message);
-                        // document.getElementById("messages2").innerHTML = error.message;
-                        document.getElementById("errorMessage").innerText = error.message;
-                        setTimeout(() => {
-                            document.getElementById("errorMessage").innerText = '';
-                        }, 3000);
+                        $("#myModal11").modal("hide");
+                        document.getElementById("firstName").innerHTML = "";
+                        document.getElementById("middleName").innerHTML = "";
+                        document.getElementById("lastName").innerHTML = "";
+                        document.getElementById("email").innerHTML = "";
+                        document.getElementById("password").innerHTML = "";
+                        document.getElementById("userRole").innerHTML = "";
+                        console.log('Added to database');
                     });
+                // firebase.auth().createUserWithEmailAndPassword(email, password)
+                //     .then(function (user) {
+                //         console.log(user.uid);
+                //         var uid = user.uid;
+                //         ref.push({
+                //                 firstName: firstName,
+                //                 middleName: middleName,
+                //                 lastName: lastName,
+                //                 email: email,
+                //                 password: password,
+                //                 role: userRole,
+                //             })
+                //             .then(function (ref) {
+                //                 console.log(ref.key);
+                //                 ref.update({
+                //                     key: ref.key
+                //                 })
+
+                //                 $("#myModal11").modal("hide");
+                //                 document.getElementById("firstName").innerHTML = "";
+                //                 document.getElementById("middleName").innerHTML = "";
+                //                 document.getElementById("lastName").innerHTML = "";
+                //                 document.getElementById("email").innerHTML = "";
+                //                 document.getElementById("password").innerHTML = "";
+                //                 document.getElementById("userRole").innerHTML = "";
+                //                 console.log('Added to database');
+                //             });
+                //         // document.getElementById("username").innerHTML = " ";
+                //         // document.getElementById("email").innerHTML = " ";
+                //         // document.getElementById("password").innerHTML = " ";
+                //         // window.location.href = './index.html';
+                //         // username = "";
+                //         // email = "";
+                //         // password = "";
+                //     }).catch(function (error) {
+                //         console.log(error.code);
+                //         console.log(error.message);
+                //         // document.getElementById("messages2").innerHTML = error.message;
+                //         document.getElementById("errorMessage").innerText = error.message;
+                //         setTimeout(() => {
+                //             document.getElementById("errorMessage").innerText = '';
+                //         }, 3000);
+                //     });
             }
 
         } else {
@@ -186,6 +244,71 @@ angular.module('newApp').controller('SettingsCtrl', function ($firebaseArray, $s
         }
     };
 
+    $scope.show_user = function () {
+        var show_user = $('#showUser').val();
+        console.log(show_user);
+        $scope.student = [];
+        $scope.faculty = [];
+        $scope.registrar = [];
+        $scope.admin = [];
+        if (show_user == 'student') {
+            firebase.database().ref("users").orderByChild("role").equalTo("student").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    console.log(childSnapshot.val());
+                    // var childKey = childSnapshot.key();
+                    var childData = childSnapshot.val();
+                    $scope.student.push(childSnapshot.val());
+                    console.log('student');
+
+
+                })
+
+            });
+            $scope.data = $scope.student;
+        } else if (show_user == 'faculty') {
+            firebase.database().ref("users").orderByChild("role").equalTo("faculty").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    console.log(childSnapshot.val());
+                    // var childKey = childSnapshot.key();
+                    var childData = childSnapshot.val();
+                    $scope.faculty.push(childSnapshot.val());
+                    console.log('faculty');
+
+
+                })
+
+            });
+            $scope.data = $scope.faculty;
+        } else if (show_user == 'registrar') {
+            firebase.database().ref("users").orderByChild("role").equalTo("registrar").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    console.log(childSnapshot.val());
+                    // var childKey = childSnapshot.key();
+                    var childData = childSnapshot.val();
+                    $scope.registrar.push(childSnapshot.val());
+                    console.log('registrar');
+
+
+                })
+
+            });
+            $scope.data = $scope.registrar;
+        } else if (show_user == 'admin') {
+            firebase.database().ref("users").orderByChild("role").equalTo("admin").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    console.log(childSnapshot.val());
+                    // var childKey = childSnapshot.key();
+                    var childData = childSnapshot.val();
+                    $scope.admin.push(childSnapshot.val());
+                    // console.log($scope.faculty);
+
+
+                })
+
+            });
+            $scope.data = $scope.admin;
+        }
+    };
 
     $scope.data = $firebaseArray(ref);
     ref.once('value', function (snapshot) {
@@ -242,10 +365,11 @@ angular.module('newApp').controller('SettingsCtrl', function ($firebaseArray, $s
         var edit_userRole = $('#edit_userRole').val();
         var edit_year = $('#edit_year').val();
         var edit_course = $('#edit_course').val();
+        console.log(edit_course);
 
-        var ref2 = firebase.database().ref("users/" + id.$id);
+        var ref2 = firebase.database().ref("users/" + id.key);
 
-        console.log(id.$id);
+        console.log(id.key);
 
         if (userRole == "student") {
             ref2.update({

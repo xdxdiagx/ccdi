@@ -199,7 +199,7 @@
         </div>
         <br />
 
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-12">
             <button
               type="button"
@@ -209,8 +209,7 @@
               Request new password
             </button>
           </div>
-          <!-- /.col -->
-        </div>
+        </div> -->
       </div>
       <!-- /.widget-user -->
     </div>
@@ -292,6 +291,52 @@
 
     // modal.style.display = "none";
   });
+
+  firebase
+    .database()
+    .ref("users")
+    .orderByChild("email")
+    .equalTo(email)
+    .once("value", function (snapshot) {
+      snapshot.forEach(function (childSnapshot) {
+        console.log(childSnapshot.val().password);
+        document.getElementById("role2").innerHTML = childSnapshot.val().role;
+        document.getElementById("firstname").innerHTML =
+          childSnapshot.val().firstName;
+        document.getElementById("middlename").innerHTML =
+          childSnapshot.val().middleName;
+        document.getElementById("lastname").innerHTML =
+          childSnapshot.val().lastName;
+
+        if (childSnapshot.val().year && childSnapshot.val().course) {
+          document.getElementById("year").innerHTML = childSnapshot.val().year;
+          document.getElementById("course").innerHTML =
+            childSnapshot.val().course;
+        } else {
+          document.getElementById("year").innerHTML = "---";
+          document.getElementById("course").innerHTML = "---";
+        }
+        // var childKey = childSnapshot.key();
+        // var childData = childSnapshot.val();
+        // $scope.faculty.push(childSnapshot.val());
+        // console.log($scope.faculty);
+      });
+      // var select = document.getElementById("faculty");
+
+      // for (var i = 0; i < $scope.faculty.length; i++) {
+      //   var opt = document.createElement("option");
+      //   opt.value = $scope.faculty[i].key;
+      //   opt.innerHTML =
+      //     $scope.faculty[i].firstName +
+      //     " " +
+      //     $scope.faculty[i].lastName +
+      //     " (" +
+      //     $scope.faculty[i].email +
+      //     ")";
+      //   select.appendChild(opt);
+      // }
+      console.log(snapshot.val());
+    });
 
   var temp = firebase.auth().currentUser.photoURL;
   console.log(temp);

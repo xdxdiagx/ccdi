@@ -402,18 +402,68 @@
         // var auth = $firebase.auth();
         var email = $("#emailSignIn").val();
         var password = $("#passwordSignIn").val();
+
         firebase
-          .auth()
-          .signInWithEmailAndPassword(email, password)
-          .then(function (user) {
-            // console.log(user.uid);
-            // window.location.pathname = '/3AB/public/index.html';
-            window.location.href = "./index.html";
-          })
-          .catch(function (error) {
-            console.log(error);
-            document.getElementById("messages").innerHTML = error.message;
+          .database()
+          .ref("users")
+          .orderByChild("email")
+          .equalTo(email)
+          .once("value", function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+              console.log(childSnapshot.val().password);
+              if (childSnapshot.val().password == password) {
+                localStorage.setItem("email", childSnapshot.val().email);
+                localStorage.setItem("user_key", childSnapshot.val().key);
+                localStorage.setItem("role", childSnapshot.val().role);
+                localStorage.setItem(
+                  "display_name",
+                  childSnapshot.val().firstName +
+                    " " +
+                    childSnapshot.val().lastName
+                );
+                window.location.href = "./index.html";
+              } else {
+                document.getElementById("messages").innerHTML =
+                  "The password is invalid!";
+              }
+              // var childKey = childSnapshot.key();
+              // var childData = childSnapshot.val();
+              // $scope.faculty.push(childSnapshot.val());
+              // console.log($scope.faculty);
+            });
+            if (snapshot.val() == null) {
+              document.getElementById("messages").innerHTML =
+                "There is no user record corresponding to this identifier. The user may have been deleted.";
+            }
+            // var select = document.getElementById("faculty");
+
+            // for (var i = 0; i < $scope.faculty.length; i++) {
+            //   var opt = document.createElement("option");
+            //   opt.value = $scope.faculty[i].key;
+            //   opt.innerHTML =
+            //     $scope.faculty[i].firstName +
+            //     " " +
+            //     $scope.faculty[i].lastName +
+            //     " (" +
+            //     $scope.faculty[i].email +
+            //     ")";
+            //   select.appendChild(opt);
+            // }
+            console.log(snapshot.val());
           });
+
+        // firebase
+        //   .auth()
+        //   .signInWithEmailAndPassword(email, password)
+        //   .then(function (user) {
+        //     // console.log(user.uid);
+        //     // window.location.pathname = '/3AB/public/index.html';
+        //     window.location.href = "./index.html";
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+        //     document.getElementById("messages").innerHTML = error.message;
+        //   });
         // console.log($('#username').val());
       }
 

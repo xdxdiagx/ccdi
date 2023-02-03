@@ -201,6 +201,36 @@
         <div class="card-header">
           <h3 class="card-title">Dean's Lister</h3>
         </div>
+        <div class="col-sm-4">
+          <!-- <h3 class="m-0 text-dark">Athletes In Action</h3> -->
+          <label for="showCourse">Course</label>
+          <select
+            class="custom-select form-control"
+            id="showCourse"
+            ng-model="showCourse"
+            ng-change="show_course()"
+          >
+            <!-- <option value="select" selected>Select</option> -->
+            <option value="Multimedia">
+              Associate Computer Technology (Multimedia)
+            </option>
+            <option value="Networking">
+              Associate Computer Technology (Networking)
+            </option>
+            <option value="BSOA">
+              Bachelor of Science in Office Administration
+            </option>
+            <option value="BSIS">
+              Bachelor of Science in Information System
+            </option>
+            <option value="BSIT">
+              Bachelor of Science in Information Technology
+            </option>
+            <option value="BSCS">
+              Bachelor of Science in Computer Science
+            </option>
+          </select>
+        </div>
         <div class="card-body">
           <table class="table table-bordered">
             <thead>
@@ -215,66 +245,67 @@
                 <!-- <th style="text-align: center">Budget</th> -->
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>1.</td>
-                <td style="text-align: center" id="tableAIAeva">Juan</td>
-                <td style="text-align: center" id="tableAIAeva">Gonzales</td>
-                <td style="text-align: center" id="tableAIAsfu">Dela Cruz</td>
-                <td style="text-align: center" id="tableAIAst">1</td>
-                <td style="text-align: center" id="tableAIAcmd">BSIT</td>
-                <td style="text-align: center" id="tableAIAchurches">95.5</td>
-                <!-- <td style="text-align: center" id="tableAIAbudget">---</td> -->
+            <tbody id="myTable">
+              <tr ng-repeat="users in data">
+                <td class="v-middle">
+                  <!-- editable username (text with validation) -->
+                  <span>
+                    <!-- <div ng-bind-html="users.username"></div> -->
+                    {{$index + 1}}
+                  </span>
+                </td>
+                <td class="v-middle">
+                  <!-- editable username (text with validation) -->
+                  <span>
+                    <!-- <div ng-bind-html="users.username"></div> -->
+                    {{ users.firstName }}
+                  </span>
+                </td>
+                <td class="v-middle">
+                  <!-- editable username (text with validation) -->
+                  <span>
+                    <!-- <div ng-bind-html="users.username"></div> -->
+                    {{ users.middleName }}
+                  </span>
+                </td>
+                <td class="v-middle">
+                  <!-- editable username (text with validation) -->
+                  <span>
+                    <!-- <div ng-bind-html="users.username"></div> -->
+                    {{ users.lastName }}
+                  </span>
+                </td>
+                <!-- <td class="v-middle">
+                      editable username (text with validation)
+                      <span>
+      {{ users.fullname }}
+      </span>
+                  </td> -->
+                <td class="v-middle">
+                  <!-- editable status (select-local) -->
+                  <span> {{ users.year }} </span>
+                </td>
+                <!--<td class="v-middle">
+                       editable status (select-local) 
+                      <span>
+      {{ users.address }}
+      </span>
+                  </td>
+                  <td class="v-middle">
+                       editable status (select-local) 
+                      <span>
+      {{ users.number }}
+      </span>
+                  </td> -->
+                <td class="v-middle">
+                  <!-- editable group (select-remote) -->
+                  <span> {{ users.course }} </span>
+                </td>
+                <td class="v-middle">
+                  <!-- editable group (select-remote) -->
+                  <span> {{ users.subjects.gwa }} </span>
+                </td>
               </tr>
-              <tr>
-                <td>2.</td>
-                <td style="text-align: center" id="tableAIAeva">Juan</td>
-                <td style="text-align: center" id="tableGANeva">De Guzman</td>
-                <td style="text-align: center" id="tableGANsfu">Tamad</td>
-                <td style="text-align: center" id="tableGANst">1</td>
-                <td style="text-align: center" id="tableGANcmd">BSIT</td>
-                <td style="text-align: center" id="tableGANchurches">95.1</td>
-                <!-- <td style="text-align: center" id="tableGANbudget">---</td> -->
-              </tr>
-              <tr>
-                <td>3.</td>
-                <td style="text-align: center" id="tableSReva">Test</td>
-                <td style="text-align: center" id="tableSReva">test</td>
-                <td style="text-align: center" id="tableSRsfu">test</td>
-                <td style="text-align: center" id="tableSRst">2</td>
-                <td style="text-align: center" id="tableSRcmd">BSCS</td>
-                <td style="text-align: center" id="tableSRchurches">95.0</td>
-                <!-- <td style="text-align: center" id="tableSRbudget">---</td> -->
-              </tr>
-              <tr>
-                <td>4.</td>
-                <td style="text-align: center" id="tableJFeva">qwerty</td>
-                <td style="text-align: center" id="tableJFeva">qwerty</td>
-                <td style="text-align: center" id="tableJFsfu">qwerty</td>
-                <td style="text-align: center" id="tableJFst">2</td>
-                <td style="text-align: center" id="tableJFcmd">BSIT</td>
-                <td style="text-align: center" id="tableJFchurches">94.2</td>
-                <!-- <td style="text-align: center" id="tableJFbudget">---</td> -->
-              </tr>
-              <tr>
-                <td>5.</td>
-                <td style="text-align: center" id="tableGCMMeva">I</td>
-                <td style="text-align: center" id="tableGCMMeva">am</td>
-                <td style="text-align: center" id="tableGCMMsfu">student</td>
-                <td style="text-align: center" id="tableGCMMst">1</td>
-                <td style="text-align: center" id="tableGCMMcmd">BSCS</td>
-                <td style="text-align: center" id="tableGCMMchurches">94</td>
-                <!-- <td style="text-align: center" id="tableGCMMbudget">---</td> -->
-              </tr>
-              <!-- <tr>
-                <td></td>
-                <td style="text-align: center">---</td>
-                <td style="text-align: center" id="tableTOTALeva">---</td>
-                <td style="text-align: center" id="tableTOTALsfu">---</td>
-                <td style="text-align: center" id="tableTOTALst">---</td>
-                <td style="text-align: center" id="tableTOTALcmd">---</td>
-                <td style="text-align: center" id="tableTOTALchurches">---</td>
-              </tr> -->
             </tbody>
           </table>
         </div>

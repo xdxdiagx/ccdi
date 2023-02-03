@@ -207,7 +207,11 @@ angular.module('newApp').controller('MySubjectsCtrl', function ($firebaseArray, 
         modal.style.display = "block";
     });
 
+
+    var user_key = localStorage.getItem("user_key");
+    var user_role = localStorage.getItem("role");
     var ref = firebase.database().ref('block');
+    var reftemp = firebase.database().ref('users/' + user_key + "/subjects");
 
     var username, email, role, id;
 
@@ -284,24 +288,46 @@ angular.module('newApp').controller('MySubjectsCtrl', function ($firebaseArray, 
     };
 
 
-    $scope.data = $firebaseArray(ref);
-    ref.once('value', function (snapshot) {
-        snapshot.forEach(function (childSnapshot) {
-            // var childKey = childSnapshot.key();
-            var childData = childSnapshot.val();
-            // $scope.data = childSnapshot.val();
-            console.log($scope.data);
+    if (user_role == 'admin' || user_role == 'faculty') {
+        $scope.data = $firebaseArray(ref);
+        ref.once('value', function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+                // var childKey = childSnapshot.key();
+                var childData = childSnapshot.val();
+                // $scope.data = childSnapshot.val();
+                console.log($scope.data);
 
-            username = childSnapshot.child('username').val();
-            // fullname = childSnapshot.child('fullname').val();
-            // address = childSnapshot.child('address').val();
-            // country = childSnapshot.child('country').val();
-            // number = childSnapshot.child('number').val();
-            email = childSnapshot.child('email').val();
-            role = childSnapshot.child('role').val();
+                username = childSnapshot.child('username').val();
+                // fullname = childSnapshot.child('fullname').val();
+                // address = childSnapshot.child('address').val();
+                // country = childSnapshot.child('country').val();
+                // number = childSnapshot.child('number').val();
+                email = childSnapshot.child('email').val();
+                role = childSnapshot.child('role').val();
 
-        })
-    });
+            })
+        });
+    } else if (user_role == 'student') {
+
+        $scope.data = $firebaseArray(reftemp);
+        reftemp.once('value', function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+                // var childKey = childSnapshot.key();
+                var childData = childSnapshot.val();
+                // $scope.data = childSnapshot.val();
+                console.log($scope.data);
+
+                username = childSnapshot.child('username').val();
+                // fullname = childSnapshot.child('fullname').val();
+                // address = childSnapshot.child('address').val();
+                // country = childSnapshot.child('country').val();
+                // number = childSnapshot.child('number').val();
+                email = childSnapshot.child('email').val();
+                role = childSnapshot.child('role').val();
+
+            })
+        });
+    }
 
     var key2 = localStorage.getItem('key');
     var ref2 = firebase.database().ref('block/' + key2 + "/students");

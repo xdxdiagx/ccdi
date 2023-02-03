@@ -135,6 +135,7 @@
           <td style="width: 10%">Midterm</td>
           <td style="width: 10%">Prefinal</td>
           <td style="width: 10%">Final</td>
+          <td style="width: 10%">GWA</td>
           <!-- <td style="width: 10%">No. Students</td> -->
           <!-- <td style="width: 10%">Unit(s)</td> -->
           <!-- <td style="width:35%">Fullname</td> -->
@@ -174,16 +175,19 @@
             <span> {{ users.subject }} </span>
           </td>
           <td class="v-middle">
-            <span> 3 </span>
+            <span> {{ users.prelim }} </span>
           </td>
           <td class="v-middle">
-            <span> 3 </span>
+            <span> {{ users.midterm }} </span>
           </td>
           <td class="v-middle">
-            <span> 3 </span>
+            <span> {{ users.prefinal }} </span>
           </td>
           <td class="v-middle">
-            <span> 3 </span>
+            <span> {{ users.final }} </span>
+          </td>
+          <td class="v-middle">
+            <span> {{ ((users.prelim * 1) + (users.midterm * 1) + (users.prefinal * 1) + (users.final * 1)) / 4 }} </span>
           </td>
           <!--<td class="v-middle">
                    editable status (select-local) 

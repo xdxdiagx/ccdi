@@ -4,8 +4,8 @@ angular
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'views/Dashboard.html',
-                controller: 'DashboardCtrl'
+                templateUrl: 'views/MySubjects.html',
+                controller: 'MySubjectsCtrl'
             })
             .when('/profile', {
                 templateUrl: 'views/Profile.html',
@@ -62,6 +62,10 @@ angular
             .when('/MySubjects', {
                 templateUrl: 'views/MySubjects.html',
                 controller: 'MySubjectsCtrl'
+            })
+            .when('/Dashboard', {
+                templateUrl: 'views/Dashboard.html',
+                controller: 'DashboardCtrl'
             })
             .when('/Settings', {
                 templateUrl: 'views/Settings.html',
