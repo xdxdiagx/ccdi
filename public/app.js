@@ -67,6 +67,10 @@ angular
                 templateUrl: 'views/Dashboard.html',
                 controller: 'DashboardCtrl'
             })
+            .when('/FacultySubjects', {
+                templateUrl: 'views/FacultySubjects.html',
+                controller: 'FacultySubjectsCtrl'
+            })
             .when('/Settings', {
                 templateUrl: 'views/Settings.html',
                 controller: 'SettingsCtrl'
