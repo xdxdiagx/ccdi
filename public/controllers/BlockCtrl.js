@@ -78,6 +78,15 @@ angular.module('newApp').controller('BlockCtrl', function ($firebaseArray, $scop
 
     });
 
+    function getSelectedText(elementId) {
+        var elt = document.getElementById(elementId);
+
+        if (elt.selectedIndex == -1)
+            return null;
+
+        return elt.options[elt.selectedIndex].text;
+    }
+
     $scope.addStudent = function () {
         var ref = firebase.database().ref('block');
         var num_stud;
@@ -103,12 +112,13 @@ angular.module('newApp').controller('BlockCtrl', function ($firebaseArray, $scop
                 var key = localStorage.getItem('key');
                 var ref2 = firebase.database().ref('users/' + $scope.students + "/subjects");
                 var refFaculty = firebase.database().ref('users/' + $scope.faculty + "/subjects");
-                var faculty_val = $("#faculty").text()
+                var faculty_val = $("#faculty").text();
                 faculty_val.replace(/\s/g, "");
+                var facultySelected = getSelectedText('faculty');
                 if (key) {
                     ref2.child(key).update({
                             blockname: $scope.blockName,
-                            faculty: faculty_val.replace(/\s/g, ""),
+                            faculty: facultySelected,
                             schoolYear: $scope.schoolYear,
                             subject: $scope.subject,
                             prelim: '',
@@ -154,7 +164,7 @@ angular.module('newApp').controller('BlockCtrl', function ($firebaseArray, $scop
 
                     ref.child(key).update({
                             blockname: $scope.blockName,
-                            faculty: faculty_val.replace(/\s/g, ""),
+                            faculty: facultySelected,
                             schoolYear: $scope.schoolYear,
                             subject: $scope.subject,
                             num_stud: localStorage.getItem("students", num_stud)
@@ -208,7 +218,7 @@ angular.module('newApp').controller('BlockCtrl', function ($firebaseArray, $scop
 
                     ref.push({
                             blockname: $scope.blockName,
-                            faculty: $scope.faculty,
+                            faculty: facultySelected,
                             schoolYear: $scope.schoolYear,
                             subject: $scope.subject
                         })

@@ -199,17 +199,17 @@
         </div>
         <br />
 
-        <!-- <div class="row">
+        <div class="row">
           <div class="col-12">
             <button
               type="button"
               class="btn btn-primary btn-block"
               id="requestPass"
             >
-              Request new password
+              Change Password
             </button>
           </div>
-        </div> -->
+        </div>
       </div>
       <!-- /.widget-user -->
     </div>
@@ -220,28 +220,41 @@
     <!-- Modal content -->
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Request New Password</h4>
+        <h4 class="modal-title">Change Password</h4>
         <button type="button" id="close2">&times;</button>
       </div>
       <div class="modal-body">
         <div class="text-danger wrapper text-center" id="messages5"></div>
         <div class="input-group mb-3">
           <input
-            type="email"
+            type="password"
             class="form-control"
-            id="forgotEmail2"
-            placeholder="Email"
+            id="password1"
+            placeholder="Password"
           />
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input
+            type="password"
+            class="form-control"
+            id="password2"
+            placeholder="Confirm Password"
+          />
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn btn-info" id="sendReq">
-          Send
+          Save
         </button>
         <!-- <button type="button" class="btn btn btn-danger" id="close2">Cancel</button> -->
       </div>
@@ -263,31 +276,58 @@
   });
 
   $("#sendReq").click(function () {
-    var email = $("#forgotEmail2").val();
+    var password1 = $("#password1").val();
+    var password2 = $("#password2").val();
+    var email = localStorage.getItem("email");
+    var user_key = localStorage.getItem("user_key");
     console.log(email);
 
-    firebase
-      .auth()
-      .sendPasswordResetEmail(email)
-      .then(function () {
-        // $scope.user.resetEmail = "";
-        // $scope.authError = 'A reset link sent to your email address. It will expire after 2 hours.';
-        $("#messages5").text(
-          "A reset link sent to your email address (Check you spam also). It will expire after 2 hours."
-        );
-        console.log(
-          "A reset link sent to your email address. It will expire after 2 hours."
-        );
-        // document.getElementById("forgotEmail2").innerHTML = " ";
-      })
-      .catch(function (error) {
-        // $scope.authError = true;
-        // $scope.authError = error.message;
-        console.log(error);
-        document.getElementById("messages").innerHTML = error.message;
+    if (password1 == password2) {
+      var ref2 = firebase.database().ref("users/" + user_key);
+      ref2
+        .update({
+          password: password1,
+        })
+        .then(function (ref) {
+          // console.log(ref.key);
+          // $("#myModal").modal("hide");
+          modal.style.display = "none";
+          $("#password1").val("");
+          $("#password2").val("");
+          $("#messages5").text("");
 
-        $("#messages5").text(error.message);
-      });
+          console.log("Added to database");
+        });
+    } else {
+      console.log("not the same");
+      $("#messages5").text("Password are not the same!");
+      setTimeout(() => {
+        $("#messages5").text("");
+      }, 3000);
+    }
+
+    // firebase
+    //   .auth()
+    //   .sendPasswordResetEmail(email)
+    //   .then(function () {
+    //     // $scope.user.resetEmail = "";
+    //     // $scope.authError = 'A reset link sent to your email address. It will expire after 2 hours.';
+    //     $("#messages5").text(
+    //       "A reset link sent to your email address (Check you spam also). It will expire after 2 hours."
+    //     );
+    //     console.log(
+    //       "A reset link sent to your email address. It will expire after 2 hours."
+    //     );
+    //     // document.getElementById("forgotEmail2").innerHTML = " ";
+    //   })
+    //   .catch(function (error) {
+    //     // $scope.authError = true;
+    //     // $scope.authError = error.message;
+    //     console.log(error);
+    //     document.getElementById("messages").innerHTML = error.message;
+
+    //     $("#messages5").text(error.message);
+    //   });
 
     // modal.style.display = "none";
   });
