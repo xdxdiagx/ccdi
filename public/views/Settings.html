@@ -123,21 +123,51 @@
       Add User
     </button>
 
-    <div class="col-sm-4">
-      <!-- <h3 class="m-0 text-dark">Athletes In Action</h3> -->
-      <label for="show_user">Show User</label>
-      <select
-        class="custom-select form-control"
-        id="showUser"
-        ng-model="showUser"
-        ng-change="show_user()"
-      >
-        <!-- <option value="select" selected>Select</option> -->
-        <option value="student">Student</option>
-        <option value="faculty">Faculty</option>
-        <option value="registrar">Registrar</option>
-        <option value="admin">Admin</option>
-      </select>
+    <div class="row">
+      <div class="col-md-3 mb-2">
+        <!-- <h3 class="m-0 text-dark">Athletes In Action</h3> -->
+        <label for="show_user">Show User</label>
+        <select
+          class="custom-select form-control"
+          id="showUser"
+          ng-model="showUser"
+          ng-change="show_user()"
+        >
+          <!-- <option value="select" selected>Select</option> -->
+          <option value="student">Student</option>
+          <option value="faculty">Faculty</option>
+          <option value="registrar">Registrar</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+
+      <div class="col-md-3 mb-2">
+        <label for="showCourse">Course</label>
+        <select
+          class="custom-select form-control"
+          id="showCourse"
+          ng-model="showCourse"
+          ng-change="show_course()"
+        >
+          <!-- <option value="select" selected>Select</option> -->
+          <option value="Multimedia">
+            Associate Computer Technology (Multimedia)
+          </option>
+          <option value="Networking">
+            Associate Computer Technology (Networking)
+          </option>
+          <option value="BSOA">
+            Bachelor of Science in Office Administration
+          </option>
+          <option value="BSIS">
+            Bachelor of Science in Information System
+          </option>
+          <option value="BSIT">
+            Bachelor of Science in Information Technology
+          </option>
+          <option value="BSCS">Bachelor of Science in Computer Science</option>
+        </select>
+      </div>
     </div>
 
     <br />

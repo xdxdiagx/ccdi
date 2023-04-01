@@ -598,6 +598,39 @@
             </div>
 
             <div class="row">
+
+              <div class="col-md-12 mb-3">
+                <label for="showCourse">Course</label>
+                <select
+                  class="custom-select form-control"
+                  id="showCourse"
+                  ng-model="showCourse"
+                  ng-change="show_course()"
+                >
+                  <!-- <option value="select" selected>Select</option> -->
+                  <option value="Multimedia">
+                    Associate Computer Technology (Multimedia)
+                  </option>
+                  <option value="Networking">
+                    Associate Computer Technology (Networking)
+                  </option>
+                  <option value="BSOA">
+                    Bachelor of Science in Office Administration
+                  </option>
+                  <option value="BSIS">
+                    Bachelor of Science in Information System
+                  </option>
+                  <option value="BSIT">
+                    Bachelor of Science in Information Technology
+                  </option>
+                  <option value="BSCS">
+                    Bachelor of Science in Computer Science
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
               <div class="col-md-12 mb-3">
                 <label for="students">Students</label>
                 <select

@@ -34,27 +34,27 @@ angular.module('newApp').controller('BlockCtrl', function ($firebaseArray, $scop
 
     });
 
-    firebase.database().ref("users").orderByChild("role").equalTo("student").once('value', function (snapshot) {
-        snapshot.forEach(function (childSnapshot) {
-            console.log(childSnapshot.val());
-            // var childKey = childSnapshot.key();
-            var childData = childSnapshot.val();
-            $scope.students.push(childSnapshot.val());
-            // console.log($scope.students);
+    // firebase.database().ref("users").orderByChild("role").equalTo("student").once('value', function (snapshot) {
+    //     snapshot.forEach(function (childSnapshot) {
+    //         console.log(childSnapshot.val());
+    //         // var childKey = childSnapshot.key();
+    //         var childData = childSnapshot.val();
+    //         $scope.students.push(childSnapshot.val());
+    //         // console.log($scope.students);
 
 
-        })
-        var select = document.getElementById('students');
+    //     })
+    //     var select = document.getElementById('students');
 
-        for (var i = 0; i < $scope.students.length; i++) {
-            var opt = document.createElement('option');
-            opt.value = $scope.students[i].key;
-            opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
-            select.appendChild(opt);
-        }
-        console.log(snapshot.val());
+    //     for (var i = 0; i < $scope.students.length; i++) {
+    //         var opt = document.createElement('option');
+    //         opt.value = $scope.students[i].key;
+    //         opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
+    //         select.appendChild(opt);
+    //     }
+    //     console.log(snapshot.val());
 
-    });
+    // });
 
     firebase.database().ref("subjects").once('value', function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
@@ -86,6 +86,171 @@ angular.module('newApp').controller('BlockCtrl', function ($firebaseArray, $scop
 
         return elt.options[elt.selectedIndex].text;
     }
+
+    function removeOptions(selectElement) {
+        var i, L = selectElement.options.length - 1;
+        for (i = L; i >= 0; i--) {
+            selectElement.remove(i);
+        }
+    }
+
+
+    $scope.show_course = function () {
+        var showCourse = $('#showCourse').val();
+        // console.log(showCourse);
+        $scope.multimedia = [];
+        $scope.networking = [];
+        $scope.bsoa = [];
+        $scope.bsis = [];
+        $scope.bsit = [];
+        $scope.bscs = [];
+        if (showCourse == 'Multimedia') {
+            $scope.students = [];
+            $scope.students.length = 0;
+            removeOptions(document.getElementById('students'));
+            firebase.database().ref("users").orderByChild("course").equalTo("Multimedia").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    console.log(childSnapshot.val());
+                    // var childKey = childSnapshot.key();
+                    var childData = childSnapshot.val();
+                    $scope.students.push(childSnapshot.val());
+                })
+                var select = document.getElementById('students');
+
+                for (var i = 0; i < $scope.students.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = $scope.students[i].key;
+                    opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
+                    select.appendChild(opt);
+                }
+                console.log(snapshot.val());
+
+            });
+            // console.log($scope.multimedia);
+
+            // $scope.multimedia.sort((a, b) => {
+            //     return a.gwa - b.gwa;
+            // });
+            // $scope.multimedia.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
+            // // console.log($scope.multimedia);
+            // $scope.multimedia.forEach((e) => {
+            //     console.log(`${e.subjects.gwa}`);
+            // });
+            // $scope.data = $scope.multimedia.slice(0, 10);
+            // console.log($scope.multimedia);
+        } else if (showCourse == 'Networking') {
+            $scope.students = [];
+            $scope.students.length = 0;
+            removeOptions(document.getElementById('students'));
+            firebase.database().ref("users").orderByChild("course").equalTo("Networking").limitToLast(10).once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    console.log(childSnapshot.val());
+                    // var childKey = childSnapshot.key();
+                    var childData = childSnapshot.val();
+                    $scope.students.push(childSnapshot.val());
+
+                })
+                var select = document.getElementById('students');
+
+                for (var i = 0; i < $scope.students.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = $scope.students[i].key;
+                    opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
+                    select.appendChild(opt);
+                }
+                console.log(snapshot.val());
+
+            });
+        } else if (showCourse == 'BSOA') {
+            $scope.students = [];
+            $scope.students.length = 0;
+            removeOptions(document.getElementById('students'));
+            firebase.database().ref("users").orderByChild("course").equalTo("BSOA").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    console.log(childSnapshot.val());
+                    // var childKey = childSnapshot.key();
+                    var childData = childSnapshot.val();
+                    $scope.students.push(childSnapshot.val());
+                })
+                var select = document.getElementById('students');
+
+                for (var i = 0; i < $scope.students.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = $scope.students[i].key;
+                    opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
+                    select.appendChild(opt);
+                }
+                console.log(snapshot.val());
+
+            });
+        } else if (showCourse == 'BSIS') {
+            $scope.students = [];
+            $scope.students.length = 0;
+            removeOptions(document.getElementById('students'));
+            firebase.database().ref("users").orderByChild("course").equalTo("BSIS").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    console.log(childSnapshot.val());
+                    // var childKey = childSnapshot.key();
+                    var childData = childSnapshot.val();
+                    $scope.students.push(childSnapshot.val());
+                })
+                var select = document.getElementById('students');
+
+                for (var i = 0; i < $scope.students.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = $scope.students[i].key;
+                    opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
+                    select.appendChild(opt);
+                }
+                console.log(snapshot.val());
+
+            });
+        } else if (showCourse == 'BSIT') {
+            $scope.students = [];
+            $scope.students.length = 0;
+            removeOptions(document.getElementById('students'));
+            firebase.database().ref("users").orderByChild("course").equalTo("BSIT").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    console.log(childSnapshot.val());
+                    // var childKey = childSnapshot.key();
+                    var childData = childSnapshot.val();
+                    $scope.students.push(childSnapshot.val());
+                })
+                var select = document.getElementById('students');
+
+                for (var i = 0; i < $scope.students.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = $scope.students[i].key;
+                    opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
+                    select.appendChild(opt);
+                }
+                console.log(snapshot.val());
+
+            });
+        } else if (showCourse == 'BSCS') {
+            $scope.students = [];
+            $scope.students.length = 0;
+            removeOptions(document.getElementById('students'));
+            firebase.database().ref("users").orderByChild("course").equalTo("BSCS").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    console.log(childSnapshot.val());
+                    // var childKey = childSnapshot.key();
+                    var childData = childSnapshot.val();
+                    $scope.students.push(childSnapshot.val());
+                })
+                var select = document.getElementById('students');
+
+                for (var i = 0; i < $scope.students.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = $scope.students[i].key;
+                    opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
+                    select.appendChild(opt);
+                }
+                console.log(snapshot.val());
+
+            });
+        }
+    };
 
     $scope.addStudent = function () {
         var ref = firebase.database().ref('block');

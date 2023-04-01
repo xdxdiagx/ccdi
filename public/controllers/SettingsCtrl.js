@@ -310,6 +310,84 @@ angular.module('newApp').controller('SettingsCtrl', function ($firebaseArray, $s
         }
     };
 
+    $scope.show_course = function () {
+        var showCourse = $('#showCourse').val();
+        // console.log(showCourse);
+        $scope.multimedia = [];
+        $scope.networking = [];
+        $scope.bsoa = [];
+        $scope.bsis = [];
+        $scope.bsit = [];
+        $scope.bscs = [];
+        if (showCourse == 'Multimedia') {
+            firebase.database().ref("users").orderByChild("course").equalTo("Multimedia").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    console.log(childSnapshot.val());
+                    // var childKey = childSnapshot.key();
+                    var childData = childSnapshot.val();
+                    $scope.multimedia.push(childSnapshot.val());
+                })
+
+            });
+            $scope.data = $scope.multimedia;
+        } else if (showCourse == 'Networking') {
+            firebase.database().ref("users").orderByChild("course").equalTo("Networking").limitToLast(10).once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    console.log(childSnapshot.val());
+                    // var childKey = childSnapshot.key();
+                    var childData = childSnapshot.val();
+                    $scope.networking.push(childSnapshot.val());
+
+                })
+
+            });
+            $scope.networking = $scope.admin;
+        } else if (showCourse == 'BSOA') {
+            firebase.database().ref("users").orderByChild("course").equalTo("BSOA").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    console.log(childSnapshot.val());
+                    // var childKey = childSnapshot.key();
+                    var childData = childSnapshot.val();
+                    $scope.bsoa.push(childSnapshot.val());
+                })
+
+            });
+            $scope.data = $scope.bsoa;
+        } else if (showCourse == 'BSIS') {
+            firebase.database().ref("users").orderByChild("course").equalTo("BSIS").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    console.log(childSnapshot.val());
+                    // var childKey = childSnapshot.key();
+                    var childData = childSnapshot.val();
+                    $scope.bsis.push(childSnapshot.val());
+                })
+
+            });
+            $scope.data = $scope.bsis;
+        } else if (showCourse == 'BSIT') {
+            firebase.database().ref("users").orderByChild("course").equalTo("BSIT").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    console.log(childSnapshot.val());
+                    // var childKey = childSnapshot.key();
+                    var childData = childSnapshot.val();
+                    $scope.bsit.push(childSnapshot.val());
+                })
+
+            });
+            $scope.data = $scope.bsit;
+        } else if (showCourse == 'BSCS') {
+            firebase.database().ref("users").orderByChild("course").equalTo("BSCS").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    console.log(childSnapshot.val());
+                    // var childKey = childSnapshot.key();
+                    var childData = childSnapshot.val();
+                    $scope.bscs.push(childSnapshot.val());
+                })
+            });
+            $scope.data = $scope.bscs;
+        }
+    };
+
     $scope.data = $firebaseArray(ref);
     ref.once('value', function (snapshot) {
         snapshot.forEach(function (childSnapshot) {

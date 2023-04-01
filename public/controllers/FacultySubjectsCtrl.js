@@ -402,23 +402,27 @@ angular.module('newApp').controller('FacultySubjectsCtrl', function ($firebaseAr
         modal3.style.display = "block";
     };
 
+    $scope.studentsValKey = [];
     $scope.selectUser = function (users) {
         console.log(users.students);
         $scope.clickedUser = users;
         $scope.studentsVal = [];
+        $scope.studentsValKey = [];
 
         for (key in users.students) {
             if (users.students.hasOwnProperty(key)) {
                 var value = users.students[key];
+                var studentKeyVal = value.studentKey;
                 // console.log(value);
                 $scope.studentsVal.push(value);
+                $scope.studentsValKey.push(value);
             }
         }
         id = users;
         $scope.data3;
         $scope.data3 = $scope.studentsVal;
         console.log($scope.data3);
-        // console.log($scope.data3);
+        console.log($scope.studentsValKey);
         ref.once('value', function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
                 // var childKey = childSnapshot.key();
@@ -473,6 +477,7 @@ angular.module('newApp').controller('FacultySubjectsCtrl', function ($firebaseAr
     };
 
     $scope.SaveNew = function () {
+
         var updateGradeRef = firebase.database().ref('block/' + $scope.clickedUser2.key + "/students/" + $scope.clickedUser2.studentKey);
         // console.log($scope.clickedUser2);
         updateGradeRef.update({
@@ -531,6 +536,62 @@ angular.module('newApp').controller('FacultySubjectsCtrl', function ($firebaseAr
             console.log(snapshot.val());
 
         });
+    };
+
+    var obj;
+    $scope.tojson = function (obj) {
+        var table = $("#myTableTest").tableToJSON({
+            extractor: function (cellIndex, $cell) {
+                return (
+                    $cell.find("input").val() ||
+                    $cell.find("#type option:selected").text()
+                );
+            },
+        });
+        return table;
+    };
+
+    $scope.SaveTest = function () {
+        $scope.tojson();
+        console.log($scope.tojson(obj));
+        console.log($scope.studentsValKey);
+        console.log($scope.studentsValKey.length);
+
+        for (var i = 0; i < $scope.studentsValKey.length; i++) {
+            var updateGradeRef = firebase.database().ref('block/' + $scope.studentsValKey[i].key + "/students/" + $scope.studentsValKey[i].studentKey);
+            // console.log($scope.clickedUser2);
+            updateGradeRef.update({
+                    prelim: $scope.tojson(obj)[i].Prelim,
+                    midterm: $scope.tojson(obj)[i].Midterm,
+                    prefinal: $scope.tojson(obj)[i].Prefinals,
+                    final: $scope.tojson(obj)[i].Finals,
+                })
+                .then(function (ref) {
+                    console.log('Added to database');
+                    $('#myModal12').modal('hide')
+                });
+        }
+        // var x = 0;
+        // while (x < $scope.studentsValKey.length) {
+        //     console.log($scope.studentsValKey[i]);
+        // }
+
+        // $scope.studentsValKey.forEach(element => {
+        //     console.log(element);
+        // });
+
+
+        // const table = document.getElementById("myTableTest");
+        // var test = $('.grade_form').val();
+        // console.log(test);
+        // for (const row of table.rows) {
+        //     for (const cell of row.cells) {
+        //         // console.log(cell.length);
+        //         console.log(cell.getElementsByTagName('td'));
+        //     }
+        // }
+
+
     };
 
     $scope.deleteUser = function () {

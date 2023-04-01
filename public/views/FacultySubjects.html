@@ -131,6 +131,7 @@
           <td style="width: 20%">Block Name</td>
           <td style="width: 20%">School Year</td>
           <td style="width: 30%">Subject</td>
+          <td style="width: 30%">Faculty</td>
           <td style="width: 20%">Actions</td>
           <!-- <td style="width: 10%">No. Students</td> -->
           <!-- <td style="width: 10%">Unit(s)</td> -->
@@ -169,6 +170,10 @@
           <td class="v-middle">
             <!-- editable status (select-local) -->
             <span> {{ users.subject }} </span>
+          </td>
+          <td class="v-middle">
+            <!-- editable status (select-local) -->
+            <span> {{ users.faculty }} </span>
           </td>
           <!--<td class="v-middle">
                    editable status (select-local) 
@@ -825,16 +830,16 @@
                   <h3 class="card-title">Student Lists</h3>
                 </div>
                 <div class="card-body">
-                  <table class="table table-bordered">
+                  <table class="table table-bordered" id="myTableTest">
                     <thead>
                       <tr>
                         <!-- <th style="width: 10px">#</th> -->
                         <th style="text-align: center">Full Name</th>
                         <th style="text-align: center">Prelim</th>
                         <th style="text-align: center">Midterm</th>
-                        <th style="text-align: center">Pre-finals</th>
+                        <th style="text-align: center">Prefinals</th>
                         <th style="text-align: center">Finals</th>
-                        <th style="text-align: center">Actions</th>
+                        <!-- <th style="text-align: center">Actions</th> -->
                         <!-- <th style="text-align: center">GWA</th> -->
                         <!-- <th style="text-align: center">Budget</th> -->
                       </tr>
@@ -853,21 +858,40 @@
                           <!-- editable username (text with validation) -->
                           <span>
                             <!-- <div ng-bind-html="users.username"></div> -->
-                            {{ users.prelim }}
+                            <!-- {{ users.prelim }} -->
+
+                            <input
+                              type="text"
+                              class="grade_form form-control"
+                              ng-value="newPrelim"
+                              ng-model="users.prelim"
+                            />
                           </span>
                         </td>
                         <td class="v-middle">
                           <!-- editable username (text with validation) -->
                           <span>
                             <!-- <div ng-bind-html="users.username"></div> -->
-                            {{ users.midterm }}
+                            <!-- {{ users.midterm }} -->
+                            <input
+                              type="text"
+                              class="grade_form form-control"
+                              ng-value="newMidterm"
+                              ng-model="users.midterm"
+                            />
                           </span>
                         </td>
                         <td class="v-middle">
                           <!-- editable username (text with validation) -->
                           <span>
                             <!-- <div ng-bind-html="users.username"></div> -->
-                            {{ users.prefinal }}
+                            <!-- {{ users.prefinal }} -->
+                            <input
+                              type="text"
+                              class="grade_form form-control"
+                              ng-value="newPrefinal"
+                              ng-model="users.prefinal"
+                            />
                           </span>
                         </td>
                         <!-- <td class="v-middle">
@@ -878,7 +902,15 @@
                               </td> -->
                         <td class="v-middle">
                           <!-- editable status (select-local) -->
-                          <span> {{ users.final }} </span>
+                          <span>
+                            <!-- {{ users.final }}  -->
+                            <input
+                              type="text"
+                              class="grade_form form-control"
+                              ng-value="newFinal"
+                              ng-model="users.final"
+                            />
+                          </span>
                         </td>
                         <!--<td class="v-middle">
                                    editable status (select-local) 
@@ -892,7 +924,7 @@
                   {{ users.number }}
                   </span>
                               </td> -->
-                        <td style="white-space: nowrap">
+                        <!-- <td style="white-space: nowrap">
                           <div class="pull-left"></div>
                           <button
                             type="button"
@@ -901,18 +933,7 @@
                           >
                             Add/Edit
                           </button>
-                          <!-- <button
-                              type="button"
-                              class="btn btn btn-danger"
-                              ng-click="selectUser2(users)"
-                            >
-                              delete
-                            </button> -->
-                          <!-- </div>
-                                  <button class="btn btn-xs btn-info" ng-click="rowform.$show()">edit</button>
-                                  <button class="btn btn-xs btn-danger" ng-click="removeUser($index)">del</button>
-                              </div> -->
-                        </td>
+                        </td> -->
                       </tr>
                       <!-- <tr>
                           <td></td>
@@ -933,6 +954,9 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">
             Close
+          </button>
+          <button type="button" class="btn btn-success" ng-click="SaveTest()">
+            Save
           </button>
           <!-- <button type="button" class="btn btn-success" ng-click="updateData()">
             Update

@@ -66,7 +66,7 @@ angular.module('newApp').controller('DashboardCtrl', function ($firebaseArray, $
 
     firebase.database().ref("subjects").once('value', function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
-            console.log(childSnapshot.val());
+            // console.log(childSnapshot.val());
             // var childKey = childSnapshot.key();
             var childData = childSnapshot.val();
             $scope.subjects.push(childSnapshot.val());
@@ -79,9 +79,45 @@ angular.module('newApp').controller('DashboardCtrl', function ($firebaseArray, $
     });
 
 
+    // firebase.database().ref("users").once('value', function (snapshot) {
+    //     snapshot.forEach(function (childSnapshot) {
+    //         // console.log(childSnapshot.val().subjects);
+    //         if (childSnapshot.val().subjects == null) {
+    //             // console.log("you need to add");
+
+    //             function getRandomInt(min, max) {
+    //                 return Math.random() * (max - min) + min;
+    //             }
+    //             var test = getRandomInt(89, 97).toFixed();
+    //             console.log(Number(test));
+    //             console.log(childSnapshot.key);
+    //             var gwa = Number(test);
+
+
+
+    //             var ref2 = firebase.database().ref("users/" + childSnapshot.key + "/subjects");
+
+    //             ref2.update({
+    //                     gwa: gwa
+    //                 })
+    //                 .then(function (ref) {
+
+    //                     console.log('Added to database');
+    //                 });
+
+    //         } else {
+
+    //         }
+
+
+    //     })
+
+    // });
+
+
     $scope.show_course = function () {
         var showCourse = $('#showCourse').val();
-        console.log(showCourse);
+        // console.log(showCourse);
         $scope.multimedia = [];
         $scope.networking = [];
         $scope.bsoa = [];
@@ -95,18 +131,31 @@ angular.module('newApp').controller('DashboardCtrl', function ($firebaseArray, $
                     // var childKey = childSnapshot.key();
                     var childData = childSnapshot.val();
                     // $scope.multimedia.push(childSnapshot.val());
-                    if (childData.subjects.gwa >= 90) {
-                        $scope.multimedia.push(childSnapshot.val());
+                    if (childData.subjects.gwa) {
+                        if (childData.subjects.gwa >= 90) {
+                            $scope.multimedia.push(childSnapshot.val());
+                        }
+                        console.log('Multimedia');
                     }
-                    console.log('Multimedia');
 
 
                 })
 
             });
-            $scope.data = $scope.student;
+            // console.log($scope.multimedia);
+
+            // $scope.multimedia.sort((a, b) => {
+            //     return a.gwa - b.gwa;
+            // });
+            $scope.multimedia.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
+            // console.log($scope.multimedia);
+            $scope.multimedia.forEach((e) => {
+                console.log(`${e.subjects.gwa}`);
+            });
+            $scope.data = $scope.multimedia.slice(0, 10);
+            // console.log($scope.multimedia);
         } else if (showCourse == 'Networking') {
-            firebase.database().ref("users").orderByChild("course").equalTo("Networking").once('value', function (snapshot) {
+            firebase.database().ref("users").orderByChild("course").equalTo("Networking").limitToLast(10).once('value', function (snapshot) {
                 snapshot.forEach(function (childSnapshot) {
                     console.log(childSnapshot.val());
                     // var childKey = childSnapshot.key();
@@ -121,7 +170,12 @@ angular.module('newApp').controller('DashboardCtrl', function ($firebaseArray, $
                 })
 
             });
-            $scope.data = $scope.networking;
+            $scope.networking.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
+            // console.log($scope.multimedia);
+            $scope.networking.forEach((e) => {
+                console.log(`${e.subjects.gwa}`);
+            });
+            $scope.data = $scope.networking.slice(0, 10);
         } else if (showCourse == 'BSOA') {
             firebase.database().ref("users").orderByChild("course").equalTo("BSOA").once('value', function (snapshot) {
                 snapshot.forEach(function (childSnapshot) {
@@ -138,7 +192,12 @@ angular.module('newApp').controller('DashboardCtrl', function ($firebaseArray, $
                 })
 
             });
-            $scope.data = $scope.registrar;
+            $scope.registrar.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
+            // console.log($scope.multimedia);
+            $scope.registrar.forEach((e) => {
+                console.log(`${e.subjects.gwa}`);
+            });
+            $scope.data = $scope.registrar.slice(0, 10);
         } else if (showCourse == 'BSIS') {
             firebase.database().ref("users").orderByChild("course").equalTo("BSIS").once('value', function (snapshot) {
                 snapshot.forEach(function (childSnapshot) {
@@ -155,7 +214,12 @@ angular.module('newApp').controller('DashboardCtrl', function ($firebaseArray, $
                 })
 
             });
-            $scope.data = $scope.bsis;
+            $scope.bsis.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
+            // console.log($scope.multimedia);
+            $scope.bsis.forEach((e) => {
+                console.log(`${e.subjects.gwa}`);
+            });
+            $scope.data = $scope.bsis.slice(0, 10);
         } else if (showCourse == 'BSIT') {
             firebase.database().ref("users").orderByChild("course").equalTo("BSIT").once('value', function (snapshot) {
                 snapshot.forEach(function (childSnapshot) {
@@ -172,8 +236,12 @@ angular.module('newApp').controller('DashboardCtrl', function ($firebaseArray, $
                 })
 
             });
-            console.log($scope.bsit.slice(0, 2, 3));
-            $scope.data = $scope.bsit;
+            $scope.bsit.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
+            // console.log($scope.multimedia);
+            $scope.bsit.forEach((e) => {
+                console.log(`${e.subjects.gwa}`);
+            });
+            $scope.data = $scope.bsit.slice(0, 10);
         } else if (showCourse == 'BSCS') {
             firebase.database().ref("users").orderByChild("course").equalTo("BSCS").once('value', function (snapshot) {
                 snapshot.forEach(function (childSnapshot) {
@@ -190,7 +258,12 @@ angular.module('newApp').controller('DashboardCtrl', function ($firebaseArray, $
                 })
 
             });
-            $scope.data = $scope.bscs;
+            $scope.bscs.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
+            // console.log($scope.multimedia);
+            $scope.bscs.forEach((e) => {
+                console.log(`${e.subjects.gwa}`);
+            });
+            $scope.data = $scope.bscs.slice(0, 10);
         }
     };
 
