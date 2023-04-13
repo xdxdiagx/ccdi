@@ -130,7 +130,10 @@
         <tr style="font-weight: bold">
           <td style="width: 20%">Block Name</td>
           <td style="width: 20%">School Year</td>
+          <td style="width: 20%">Semester</td>
           <td style="width: 30%">Subject</td>
+          <td style="width: 30%">Course</td>
+          <td style="width: 10%">Year</td>
           <td style="width: 30%">Faculty</td>
           <td style="width: 20%">Actions</td>
           <!-- <td style="width: 10%">No. Students</td> -->
@@ -161,6 +164,13 @@
               {{ users.schoolYear }}
             </span>
           </td>
+          <td class="v-middle">
+            <!-- editable username (text with validation) -->
+            <span>
+              <!-- <div ng-bind-html="users.username"></div> -->
+              {{ users.semester }}
+            </span>
+          </td>
           <!-- <td class="v-middle">
                   editable username (text with validation)
                   <span>
@@ -170,6 +180,14 @@
           <td class="v-middle">
             <!-- editable status (select-local) -->
             <span> {{ users.subject }} </span>
+          </td>
+          <td class="v-middle">
+            <!-- editable status (select-local) -->
+            <span> {{ users.course }} </span>
+          </td>
+          <td class="v-middle">
+            <!-- editable status (select-local) -->
+            <span> {{ users.year }} </span>
           </td>
           <td class="v-middle">
             <!-- editable status (select-local) -->
@@ -830,122 +848,159 @@
                   <h3 class="card-title">Student Lists</h3>
                 </div>
                 <div class="card-body">
-                  <table class="table table-bordered" id="myTableTest">
-                    <thead>
-                      <tr>
-                        <!-- <th style="width: 10px">#</th> -->
-                        <th style="text-align: center">Full Name</th>
-                        <th style="text-align: center">Prelim</th>
-                        <th style="text-align: center">Midterm</th>
-                        <th style="text-align: center">Prefinals</th>
-                        <th style="text-align: center">Finals</th>
-                        <!-- <th style="text-align: center">Actions</th> -->
-                        <!-- <th style="text-align: center">GWA</th> -->
-                        <!-- <th style="text-align: center">Budget</th> -->
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr ng-repeat="users in data3">
-                        <td class="v-middle">
-                          <!-- editable username (text with validation) -->
-                          <span>
-                            <!-- <div ng-bind-html="users.username"></div> -->
-                            {{ users.firstName}} {{ users.middleName }} {{
-                            users.lastName }}
-                          </span>
-                        </td>
-                        <td class="v-middle">
-                          <!-- editable username (text with validation) -->
-                          <span>
-                            <!-- <div ng-bind-html="users.username"></div> -->
-                            <!-- {{ users.prelim }} -->
+                  <fieldset id="myTableFieldSet">
+                    <table class="table table-bordered" id="myTableTest">
+                      <thead>
+                        <tr>
+                          <!-- <th style="width: 10px">#</th> -->
+                          <th style="text-align: center">Full Name</th>
+                          <th style="text-align: center">Prelim</th>
+                          <th style="text-align: center">Midterm</th>
+                          <th style="text-align: center">Prefinals</th>
+                          <th style="text-align: center">Finals</th>
+                          <th style="text-align: center">Average Grade</th>
+                          <th style="text-align: center">Remarks</th>
+                          <!-- <th style="text-align: center">Actions</th> -->
+                          <!-- <th style="text-align: center">GWA</th> -->
+                          <!-- <th style="text-align: center">Budget</th> -->
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="users in data3">
+                          <td class="v-middle">
+                            <!-- editable username (text with validation) -->
+                            <span>
+                              <!-- <div ng-bind-html="users.username"></div> -->
+                              {{ users.firstName}} {{ users.middleName }} {{
+                              users.lastName }}
+                            </span>
+                          </td>
+                          <td class="v-middle">
+                            <!-- editable username (text with validation) -->
+                            <span>
+                              <!-- <div ng-bind-html="users.username"></div> -->
+                              <!-- {{ users.prelim }} -->
 
-                            <input
-                              type="text"
-                              class="grade_form form-control"
-                              ng-value="newPrelim"
-                              ng-model="users.prelim"
-                            />
-                          </span>
-                        </td>
-                        <td class="v-middle">
-                          <!-- editable username (text with validation) -->
-                          <span>
-                            <!-- <div ng-bind-html="users.username"></div> -->
-                            <!-- {{ users.midterm }} -->
-                            <input
-                              type="text"
-                              class="grade_form form-control"
-                              ng-value="newMidterm"
-                              ng-model="users.midterm"
-                            />
-                          </span>
-                        </td>
-                        <td class="v-middle">
-                          <!-- editable username (text with validation) -->
-                          <span>
-                            <!-- <div ng-bind-html="users.username"></div> -->
-                            <!-- {{ users.prefinal }} -->
-                            <input
-                              type="text"
-                              class="grade_form form-control"
-                              ng-value="newPrefinal"
-                              ng-model="users.prefinal"
-                            />
-                          </span>
-                        </td>
-                        <!-- <td class="v-middle">
-                                  editable username (text with validation)
-                                  <span>
-                  {{ users.fullname }}
-                  </span>
-                              </td> -->
-                        <td class="v-middle">
-                          <!-- editable status (select-local) -->
-                          <span>
-                            <!-- {{ users.final }}  -->
-                            <input
-                              type="text"
-                              class="grade_form form-control"
-                              ng-value="newFinal"
-                              ng-model="users.final"
-                            />
-                          </span>
-                        </td>
-                        <!--<td class="v-middle">
-                                   editable status (select-local) 
-                                  <span>
-                  {{ users.address }}
-                  </span>
-                              </td>
-                              <td class="v-middle">
-                                   editable status (select-local) 
-                                  <span>
-                  {{ users.number }}
-                  </span>
-                              </td> -->
-                        <!-- <td style="white-space: nowrap">
-                          <div class="pull-left"></div>
-                          <button
-                            type="button"
-                            class="btn btn btn-info"
-                            ng-click="selectUser3(users)"
-                          >
-                            Add/Edit
-                          </button>
-                        </td> -->
-                      </tr>
-                      <!-- <tr>
-                          <td></td>
-                          <td style="text-align: center">---</td>
-                          <td style="text-align: center" id="tableTOTALeva">---</td>
-                          <td style="text-align: center" id="tableTOTALsfu">---</td>
-                          <td style="text-align: center" id="tableTOTALst">---</td>
-                          <td style="text-align: center" id="tableTOTALcmd">---</td>
-                          <td style="text-align: center" id="tableTOTALchurches">---</td>
-                        </tr> -->
-                    </tbody>
-                  </table>
+                              <input
+                                type="text"
+                                class="grade_form form-control"
+                                ng-value="newPrelim"
+                                ng-model="users.prelim"
+                                id="id1"
+                              />
+                            </span>
+                          </td>
+                          <td class="v-middle">
+                            <!-- editable username (text with validation) -->
+                            <span>
+                              <!-- <div ng-bind-html="users.username"></div> -->
+                              <!-- {{ users.midterm }} -->
+                              <input
+                                type="text"
+                                class="grade_form form-control"
+                                ng-value="newMidterm"
+                                ng-model="users.midterm"
+                                id="id2"
+                              />
+                            </span>
+                          </td>
+                          <td class="v-middle">
+                            <!-- editable username (text with validation) -->
+                            <span>
+                              <!-- <div ng-bind-html="users.username"></div> -->
+                              <!-- {{ users.prefinal }} -->
+                              <input
+                                type="text"
+                                class="grade_form form-control"
+                                ng-value="newPrefinal"
+                                ng-model="users.prefinal"
+                                id="id3"
+                              />
+                            </span>
+                          </td>
+                          <!-- <td class="v-middle">
+                                    editable username (text with validation)
+                                    <span>
+                    {{ users.fullname }}
+                    </span>
+                                </td> -->
+                          <td class="v-middle">
+                            <!-- editable status (select-local) -->
+                            <span>
+                              <!-- {{ users.final }}  -->
+                              <input
+                                type="text"
+                                class="grade_form form-control"
+                                ng-value="newFinal"
+                                ng-model="users.final"
+                                id="id4"
+                              />
+                            </span>
+                          </td>
+
+                          <td class="v-middle">
+                            <!-- editable status (select-local) -->
+                            <span>
+                              {{ ((users.prelim * 1) + (users.midterm * 1) +
+                              (users.prefinal * 1) + (users.final * 1)) / 4 }}
+                              <!-- <input
+                                type="text"
+                                class="grade_form form-control"
+                                ng-value="newAverage"
+                                ng-model="users.average"
+                                id="id5"
+                              /> -->
+                            </span>
+                          </td>
+
+                          <td class="v-middle">
+                            <!-- editable status (select-local) -->
+                            <span>
+                              <!-- {{ users.final }}  -->
+                              <input
+                                type="text"
+                                class="grade_form form-control"
+                                ng-value="newRemarks"
+                                ng-model="users.remarks"
+                                id="id6"
+                              />
+                            </span>
+                          </td>
+                          <!--<td class="v-middle">
+                                     editable status (select-local) 
+                                    <span>
+                    {{ users.address }}
+                    </span>
+                                </td>
+                                <td class="v-middle">
+                                     editable status (select-local) 
+                                    <span>
+                    {{ users.number }}
+                    </span>
+                                </td> -->
+                          <!-- <td style="white-space: nowrap">
+                            <div class="pull-left"></div>
+                            <button
+                              type="button"
+                              class="btn btn btn-info"
+                              ng-click="selectUser3(users)"
+                            >
+                              Add/Edit
+                            </button>
+                          </td> -->
+                        </tr>
+                        <!-- <tr>
+                            <td></td>
+                            <td style="text-align: center">---</td>
+                            <td style="text-align: center" id="tableTOTALeva">---</td>
+                            <td style="text-align: center" id="tableTOTALsfu">---</td>
+                            <td style="text-align: center" id="tableTOTALst">---</td>
+                            <td style="text-align: center" id="tableTOTALcmd">---</td>
+                            <td style="text-align: center" id="tableTOTALchurches">---</td>
+                          </tr> -->
+                      </tbody>
+                    </table>
+                  </fieldset>
                 </div>
               </div>
             </div>
@@ -955,7 +1010,12 @@
           <button type="button" class="btn btn-danger" data-dismiss="modal">
             Close
           </button>
-          <button type="button" class="btn btn-success" ng-click="SaveTest()">
+          <button
+            type="button"
+            class="btn btn-success"
+            ng-click="SaveTest()"
+            id="saveGrade"
+          >
             Save
           </button>
           <!-- <button type="button" class="btn btn-success" ng-click="updateData()">

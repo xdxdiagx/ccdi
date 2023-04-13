@@ -115,15 +115,18 @@ angular.module('newApp').controller('BlockCtrl', function ($firebaseArray, $scop
                     var childData = childSnapshot.val();
                     $scope.students.push(childSnapshot.val());
                 })
-                var select = document.getElementById('students');
+                // var select = document.getElementById('students');
 
-                for (var i = 0; i < $scope.students.length; i++) {
-                    var opt = document.createElement('option');
-                    opt.value = $scope.students[i].key;
-                    opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
-                    select.appendChild(opt);
-                }
+                // for (var i = 0; i < $scope.students.length; i++) {
+                //     var opt = document.createElement('option');
+                //     opt.value = $scope.students[i].key;
+                //     opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
+                //     select.appendChild(opt);
+                // }
                 console.log(snapshot.val());
+                localStorage.setItem("data", "multimedia");
+                $('#filterYear').val(0);
+                $scope.data = $scope.students;
 
             });
             // console.log($scope.multimedia);
@@ -150,15 +153,18 @@ angular.module('newApp').controller('BlockCtrl', function ($firebaseArray, $scop
                     $scope.students.push(childSnapshot.val());
 
                 })
-                var select = document.getElementById('students');
+                // var select = document.getElementById('students');
 
-                for (var i = 0; i < $scope.students.length; i++) {
-                    var opt = document.createElement('option');
-                    opt.value = $scope.students[i].key;
-                    opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
-                    select.appendChild(opt);
-                }
+                // for (var i = 0; i < $scope.students.length; i++) {
+                //     var opt = document.createElement('option');
+                //     opt.value = $scope.students[i].key;
+                //     opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
+                //     select.appendChild(opt);
+                // }
                 console.log(snapshot.val());
+                localStorage.setItem("data", "networking");
+                $('#filterYear').val(0);
+                $scope.data = $scope.students;
 
             });
         } else if (showCourse == 'BSOA') {
@@ -172,15 +178,18 @@ angular.module('newApp').controller('BlockCtrl', function ($firebaseArray, $scop
                     var childData = childSnapshot.val();
                     $scope.students.push(childSnapshot.val());
                 })
-                var select = document.getElementById('students');
+                // var select = document.getElementById('students');
 
-                for (var i = 0; i < $scope.students.length; i++) {
-                    var opt = document.createElement('option');
-                    opt.value = $scope.students[i].key;
-                    opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
-                    select.appendChild(opt);
-                }
+                // for (var i = 0; i < $scope.students.length; i++) {
+                //     var opt = document.createElement('option');
+                //     opt.value = $scope.students[i].key;
+                //     opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
+                //     select.appendChild(opt);
+                // }
                 console.log(snapshot.val());
+                localStorage.setItem("data", "bsoa");
+                $('#filterYear').val(0);
+                $scope.data = $scope.students;
 
             });
         } else if (showCourse == 'BSIS') {
@@ -194,15 +203,18 @@ angular.module('newApp').controller('BlockCtrl', function ($firebaseArray, $scop
                     var childData = childSnapshot.val();
                     $scope.students.push(childSnapshot.val());
                 })
-                var select = document.getElementById('students');
+                // var select = document.getElementById('students');
 
-                for (var i = 0; i < $scope.students.length; i++) {
-                    var opt = document.createElement('option');
-                    opt.value = $scope.students[i].key;
-                    opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
-                    select.appendChild(opt);
-                }
+                // for (var i = 0; i < $scope.students.length; i++) {
+                //     var opt = document.createElement('option');
+                //     opt.value = $scope.students[i].key;
+                //     opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
+                //     select.appendChild(opt);
+                // }
                 console.log(snapshot.val());
+                localStorage.setItem("data", "bsis");
+                $('#filterYear').val(0);
+                $scope.data = $scope.students;
 
             });
         } else if (showCourse == 'BSIT') {
@@ -216,15 +228,18 @@ angular.module('newApp').controller('BlockCtrl', function ($firebaseArray, $scop
                     var childData = childSnapshot.val();
                     $scope.students.push(childSnapshot.val());
                 })
-                var select = document.getElementById('students');
+                // var select = document.getElementById('students');
 
-                for (var i = 0; i < $scope.students.length; i++) {
-                    var opt = document.createElement('option');
-                    opt.value = $scope.students[i].key;
-                    opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
-                    select.appendChild(opt);
-                }
+                // for (var i = 0; i < $scope.students.length; i++) {
+                //     var opt = document.createElement('option');
+                //     opt.value = $scope.students[i].key;
+                //     opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
+                //     select.appendChild(opt);
+                // }
                 console.log(snapshot.val());
+                localStorage.setItem("data", "bsit");
+                $('#filterYear').val(0);
+                $scope.data = $scope.students;
 
             });
         } else if (showCourse == 'BSCS') {
@@ -238,18 +253,147 @@ angular.module('newApp').controller('BlockCtrl', function ($firebaseArray, $scop
                     var childData = childSnapshot.val();
                     $scope.students.push(childSnapshot.val());
                 })
-                var select = document.getElementById('students');
+                // var select = document.getElementById('students');
 
-                for (var i = 0; i < $scope.students.length; i++) {
-                    var opt = document.createElement('option');
-                    opt.value = $scope.students[i].key;
-                    opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
-                    select.appendChild(opt);
-                }
+                // for (var i = 0; i < $scope.students.length; i++) {
+                //     var opt = document.createElement('option');
+                //     opt.value = $scope.students[i].key;
+                //     opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
+                //     select.appendChild(opt);
+                // }
                 console.log(snapshot.val());
+                localStorage.setItem("data", "bscs");
+                $('#filterYear').val(0);
+                $scope.data = $scope.students;
 
             });
         }
+    };
+
+
+    $scope.filter_year = function () {
+        // $scope.tempData = [];
+        $scope.yearShow = [];
+        var year = $('#filterYear').val();
+        var data = localStorage.getItem('data');
+        var filter_data = localStorage.getItem('filter_data');
+        // console.log(data);
+        if (data == filter_data) {
+
+        } else {
+            localStorage.setItem("filter_data", data);
+            $scope.tempData = $scope.data;
+        }
+        console.log(year);
+        if (year == 1) {
+            $scope.yearShow = [];
+            $scope.yearShow.length = 0;
+            removeOptions(document.getElementById('students'));
+            if (data == filter_data) {
+                $scope.tempData.forEach((e) => {
+                    if (e.year == '1' || e.year == 1) {
+                        $scope.yearShow.push(e)
+                    }
+                });
+            } else {
+                $scope.data.forEach((e) => {
+                    if (e.year == '1' || e.year == 1) {
+                        $scope.yearShow.push(e)
+                    }
+                });
+            }
+            var select = document.getElementById('students');
+
+            for (var i = 0; i < $scope.yearShow.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = $scope.yearShow[i].key;
+                opt.innerHTML = $scope.yearShow[i].firstName + " " + $scope.yearShow[i].lastName + " (" + $scope.yearShow[i].email + ")";
+                select.appendChild(opt);
+            }
+            // $scope.data = $scope.yearShow;
+        } else if (year == 2) {
+            $scope.yearShow = [];
+            $scope.yearShow.length = 0;
+            removeOptions(document.getElementById('students'));
+            if (data == filter_data) {
+                $scope.tempData.forEach((e) => {
+                    if (e.year == '2' || e.year == 2) {
+                        $scope.yearShow.push(e)
+                    }
+                });
+            } else {
+                $scope.data.forEach((e) => {
+                    if (e.year == '2' || e.year == 2) {
+                        $scope.yearShow.push(e)
+                    }
+                });
+            }
+            var select = document.getElementById('students');
+
+            for (var i = 0; i < $scope.yearShow.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = $scope.yearShow[i].key;
+                opt.innerHTML = $scope.yearShow[i].firstName + " " + $scope.yearShow[i].lastName + " (" + $scope.yearShow[i].email + ")";
+                select.appendChild(opt);
+            }
+
+        } else if (year == 3) {
+            $scope.yearShow = [];
+            $scope.yearShow.length = 0;
+            removeOptions(document.getElementById('students'));
+            if (data == filter_data) {
+                $scope.tempData.forEach((e) => {
+                    if (e.year == '3' || e.year == 3) {
+                        $scope.yearShow.push(e)
+                    }
+                });
+            } else {
+                $scope.data.forEach((e) => {
+                    if (e.year == '3' || e.year == 3) {
+                        $scope.yearShow.push(e)
+                    }
+                });
+            }
+            var select = document.getElementById('students');
+
+            for (var i = 0; i < $scope.yearShow.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = $scope.yearShow[i].key;
+                opt.innerHTML = $scope.yearShow[i].firstName + " " + $scope.yearShow[i].lastName + " (" + $scope.yearShow[i].email + ")";
+                select.appendChild(opt);
+            }
+
+        } else if (year == 4) {
+            $scope.yearShow = [];
+            $scope.yearShow.length = 0;
+            removeOptions(document.getElementById('students'));
+            if (data == filter_data) {
+                $scope.tempData.forEach((e) => {
+                    if (e.year == '4' || e.year == 4) {
+                        $scope.yearShow.push(e)
+                    }
+                });
+            } else {
+                $scope.data.forEach((e) => {
+                    if (e.year == '4' || e.year == 4) {
+                        $scope.yearShow.push(e)
+                    }
+                });
+            }
+            var select = document.getElementById('students');
+
+            for (var i = 0; i < $scope.yearShow.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = $scope.yearShow[i].key;
+                opt.innerHTML = $scope.yearShow[i].firstName + " " + $scope.yearShow[i].lastName + " (" + $scope.yearShow[i].email + ")";
+                select.appendChild(opt);
+            }
+
+        }
+
+        // console.log($scope.data);
+
+
     };
 
     $scope.addStudent = function () {
@@ -290,6 +434,7 @@ angular.module('newApp').controller('BlockCtrl', function ($firebaseArray, $scop
                             midterm: '',
                             prefinal: '',
                             final: '',
+                            remarks: '',
                             key: key
                         })
                         .then(function (ref) {
@@ -332,7 +477,10 @@ angular.module('newApp').controller('BlockCtrl', function ($firebaseArray, $scop
                             faculty: facultySelected,
                             schoolYear: $scope.schoolYear,
                             subject: $scope.subject,
-                            num_stud: localStorage.getItem("students", num_stud)
+                            num_stud: localStorage.getItem("students", num_stud),
+                            semester: $scope.semester,
+                            course: childSnapshot.val().course,
+                            year: childSnapshot.val().year
                         })
                         .then(function (ref) {
                             // console.log(ref.key);
@@ -364,6 +512,7 @@ angular.module('newApp').controller('BlockCtrl', function ($firebaseArray, $scop
                                     midterm: '',
                                     prefinal: '',
                                     final: '',
+                                    remarks: '',
                                     subject: $scope.subject,
                                     key: key
                                 })
@@ -404,6 +553,7 @@ angular.module('newApp').controller('BlockCtrl', function ($firebaseArray, $scop
                                 prelim: '',
                                 midterm: '',
                                 prefinal: '',
+                                remarks: '',
                                 final: '',
                             })
                             // $("#myModal11").modal("hide");
@@ -533,13 +683,13 @@ angular.module('newApp').controller('BlockCtrl', function ($firebaseArray, $scop
     };
 
 
-    $scope.data = $firebaseArray(ref);
+    $scope.data3 = $firebaseArray(ref);
     ref.once('value', function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
             // var childKey = childSnapshot.key();
             var childData = childSnapshot.val();
             // $scope.data = childSnapshot.val();
-            console.log($scope.data);
+            console.log($scope.data3);
 
             username = childSnapshot.child('username').val();
             // fullname = childSnapshot.child('fullname').val();

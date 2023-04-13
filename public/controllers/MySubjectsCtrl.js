@@ -308,12 +308,29 @@ angular.module('newApp').controller('MySubjectsCtrl', function ($firebaseArray, 
             })
         });
     } else if (user_role == 'student') {
-
-        $scope.data = $firebaseArray(reftemp);
+        $scope.alt = [];
+        $scope.average;
+        $scope.allgrades = [];
+        // $scope.data = $firebaseArray(reftemp);
         reftemp.once('value', function (snapshot) {
+            var sub = snapshot.val();
+            for (key in sub) {
+                // console.log(key);
+                if (key != 'gwa') {
+                    var value = sub[key];
+                    const perSubGWA = ((value.prelim * 1) + (value.midterm * 1) + (value.prefinal * 1) + (value.final * 1)) / 4;
+                    $scope.alt.push(value);
+                    $scope.allgrades.push(perSubGWA);
+                }
+            }
+            var sum = $scope.allgrades.reduce((r, c) => r + parseFloat(c), 0)
+            $scope.average = sum / $scope.allgrades.length
+            // console.log(sum / $scope.allgrades.length);
+            // console.log(snapshot.val());
             snapshot.forEach(function (childSnapshot) {
                 // var childKey = childSnapshot.key();
                 var childData = childSnapshot.val();
+                console.log(childData);
                 // $scope.data = childSnapshot.val();
                 console.log($scope.data);
 
@@ -327,6 +344,8 @@ angular.module('newApp').controller('MySubjectsCtrl', function ($firebaseArray, 
 
             })
         });
+        $scope.data = $scope.alt;
+
     }
 
     var key2 = localStorage.getItem('key');

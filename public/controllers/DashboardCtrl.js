@@ -147,12 +147,16 @@ angular.module('newApp').controller('DashboardCtrl', function ($firebaseArray, $
             // $scope.multimedia.sort((a, b) => {
             //     return a.gwa - b.gwa;
             // });
-            $scope.multimedia.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
-            // console.log($scope.multimedia);
-            $scope.multimedia.forEach((e) => {
-                console.log(`${e.subjects.gwa}`);
-            });
-            $scope.data = $scope.multimedia.slice(0, 10);
+            // $scope.multimedia.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
+            // // console.log($scope.multimedia);
+            // $scope.multimedia.forEach((e) => {
+            //     console.log(`${e.subjects.gwa}`);
+            // });
+            // $scope.data = $scope.multimedia.slice(0, 10);
+            localStorage.setItem("data", "multimedia");
+            $('#filterYear').val(0);
+            $scope.data = $scope.multimedia;
+
             // console.log($scope.multimedia);
         } else if (showCourse == 'Networking') {
             firebase.database().ref("users").orderByChild("course").equalTo("Networking").limitToLast(10).once('value', function (snapshot) {
@@ -170,12 +174,16 @@ angular.module('newApp').controller('DashboardCtrl', function ($firebaseArray, $
                 })
 
             });
-            $scope.networking.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
-            // console.log($scope.multimedia);
-            $scope.networking.forEach((e) => {
-                console.log(`${e.subjects.gwa}`);
-            });
-            $scope.data = $scope.networking.slice(0, 10);
+            // $scope.networking.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
+            // // console.log($scope.multimedia);
+            // $scope.networking.forEach((e) => {
+            //     console.log(`${e.subjects.gwa}`);
+            // });
+            // $scope.data = $scope.networking.slice(0, 10);
+            localStorage.setItem("data", "networking");
+            $('#filterYear').val(0);
+            $scope.data = $scope.networking;
+
         } else if (showCourse == 'BSOA') {
             firebase.database().ref("users").orderByChild("course").equalTo("BSOA").once('value', function (snapshot) {
                 snapshot.forEach(function (childSnapshot) {
@@ -192,12 +200,16 @@ angular.module('newApp').controller('DashboardCtrl', function ($firebaseArray, $
                 })
 
             });
-            $scope.registrar.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
-            // console.log($scope.multimedia);
-            $scope.registrar.forEach((e) => {
-                console.log(`${e.subjects.gwa}`);
-            });
-            $scope.data = $scope.registrar.slice(0, 10);
+            // $scope.registrar.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
+            // // console.log($scope.multimedia);
+            // $scope.registrar.forEach((e) => {
+            //     console.log(`${e.subjects.gwa}`);
+            // });
+            // $scope.data = $scope.registrar.slice(0, 10);
+            localStorage.setItem("data", "bsoa");
+            $('#filterYear').val(0);
+            $scope.data = $scope.bsoa;
+
         } else if (showCourse == 'BSIS') {
             firebase.database().ref("users").orderByChild("course").equalTo("BSIS").once('value', function (snapshot) {
                 snapshot.forEach(function (childSnapshot) {
@@ -214,12 +226,16 @@ angular.module('newApp').controller('DashboardCtrl', function ($firebaseArray, $
                 })
 
             });
-            $scope.bsis.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
-            // console.log($scope.multimedia);
-            $scope.bsis.forEach((e) => {
-                console.log(`${e.subjects.gwa}`);
-            });
-            $scope.data = $scope.bsis.slice(0, 10);
+            // $scope.bsis.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
+            // // console.log($scope.multimedia);
+            // $scope.bsis.forEach((e) => {
+            //     console.log(`${e.subjects.gwa}`);
+            // });
+            // $scope.data = $scope.bsis.slice(0, 10);
+            localStorage.setItem("data", "bsis");
+            $('#filterYear').val(0);
+            $scope.data = $scope.bsis;
+
         } else if (showCourse == 'BSIT') {
             firebase.database().ref("users").orderByChild("course").equalTo("BSIT").once('value', function (snapshot) {
                 snapshot.forEach(function (childSnapshot) {
@@ -236,12 +252,16 @@ angular.module('newApp').controller('DashboardCtrl', function ($firebaseArray, $
                 })
 
             });
-            $scope.bsit.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
-            // console.log($scope.multimedia);
-            $scope.bsit.forEach((e) => {
-                console.log(`${e.subjects.gwa}`);
-            });
-            $scope.data = $scope.bsit.slice(0, 10);
+            // $scope.bsit.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
+            // // console.log($scope.multimedia);
+            // $scope.bsit.forEach((e) => {
+            //     console.log(`${e.subjects.gwa}`);
+            // });
+            // $scope.data = $scope.bsit.slice(0, 10);
+            localStorage.setItem("data", "bsit");
+            $('#filterYear').val(0);
+            $scope.data = $scope.bsit;
+
         } else if (showCourse == 'BSCS') {
             firebase.database().ref("users").orderByChild("course").equalTo("BSCS").once('value', function (snapshot) {
                 snapshot.forEach(function (childSnapshot) {
@@ -258,13 +278,124 @@ angular.module('newApp').controller('DashboardCtrl', function ($firebaseArray, $
                 })
 
             });
-            $scope.bscs.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
+            // $scope.bscs.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
+            // // console.log($scope.multimedia);
+            // $scope.bscs.forEach((e) => {
+            //     console.log(`${e.subjects.gwa}`);
+            // });
+            // $scope.data = $scope.bscs.slice(0, 10);
+            localStorage.setItem("data", "bscs");
+            $('#filterYear').val(0);
+            $scope.data = $scope.bscs;
+
+        }
+    };
+
+    $scope.filter_year = function () {
+        // $scope.tempData = [];
+        $scope.yearShow = [];
+        var year = $('#filterYear').val();
+        var data = localStorage.getItem('data');
+        var filter_data = localStorage.getItem('filter_data');
+        // console.log(data);
+        console.log($scope.tempData);
+        if (data == filter_data) {
+
+        } else {
+            localStorage.setItem("filter_data", data);
+            $scope.tempData = $scope.data;
+        }
+        console.log(year);
+        if (year == 1) {
+            if (data == filter_data) {
+                $scope.tempData.forEach((e) => {
+                    if (e.year == '1' || e.year == 1) {
+                        $scope.yearShow.push(e)
+                    }
+                });
+            } else {
+                $scope.data.forEach((e) => {
+                    if (e.year == '1' || e.year == 1) {
+                        $scope.yearShow.push(e)
+                    }
+                });
+            }
+
+            $scope.yearShow.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
             // console.log($scope.multimedia);
-            $scope.bscs.forEach((e) => {
+            $scope.yearShow.forEach((e) => {
                 console.log(`${e.subjects.gwa}`);
             });
-            $scope.data = $scope.bscs.slice(0, 10);
+            $scope.data = $scope.yearShow.slice(0, 10);
+            // $scope.data = $scope.yearShow;
+        } else if (year == 2) {
+            if (data == filter_data) {
+                $scope.tempData.forEach((e) => {
+                    if (e.year == '2' || e.year == 2) {
+                        $scope.yearShow.push(e)
+                    }
+                });
+            } else {
+                $scope.data.forEach((e) => {
+                    if (e.year == '2' || e.year == 2) {
+                        $scope.yearShow.push(e)
+                    }
+                });
+            }
+            $scope.yearShow.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
+            // console.log($scope.multimedia);
+            $scope.yearShow.forEach((e) => {
+                console.log(`${e.subjects.gwa}`);
+            });
+            $scope.data = $scope.yearShow.slice(0, 10);
+
+        } else if (year == 3) {
+            if (data == filter_data) {
+                $scope.tempData.forEach((e) => {
+                    if (e.year == '3' || e.year == 3) {
+                        $scope.yearShow.push(e)
+                    }
+                });
+            } else {
+                $scope.data.forEach((e) => {
+                    if (e.year == '3' || e.year == 3) {
+                        $scope.yearShow.push(e)
+                    }
+                });
+            }
+            $scope.yearShow.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
+            // console.log($scope.multimedia);
+            $scope.yearShow.forEach((e) => {
+                console.log(`${e.subjects.gwa}`);
+            });
+            $scope.data = $scope.yearShow.slice(0, 10);
+
+        } else if (year == 4) {
+            if (data == filter_data) {
+                $scope.tempData.forEach((e) => {
+                    if (e.year == '4' || e.year == 4) {
+                        $scope.yearShow.push(e)
+                    }
+                });
+            } else {
+                $scope.data.forEach((e) => {
+                    if (e.year == '4' || e.year == 4) {
+                        $scope.yearShow.push(e)
+                    }
+                });
+            }
+            $scope.yearShow.sort((a, b) => b.subjects.gwa - a.subjects.gwa);
+            // console.log($scope.multimedia);
+            $scope.yearShow.forEach((e) => {
+                console.log(`${e.subjects.gwa}`);
+            });
+            $scope.data = $scope.yearShow.slice(0, 10);
+
         }
+
+        // console.log($scope.data);
+
+
     };
 
 

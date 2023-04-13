@@ -12,6 +12,30 @@ angular.module('newApp').controller('FacultySubjectsCtrl', function ($firebaseAr
         }, 500);
     }
 
+    // firebase.database().ref("block").once('value', function (snapshot) {
+    //     snapshot.forEach(function (childSnapshot) {
+    //         console.log(childSnapshot.val());
+    //         if (childSnapshot.val().semester == null) {
+    //             console.log("you need to add");
+    //             var ref2 = firebase.database().ref("block/" + childSnapshot.key);
+
+    //             ref2.update({
+    //                     semester: "2"
+    //                 })
+    //                 .then(function (ref) {
+
+    //                     console.log('Added to database');
+    //                 });
+
+    //         } else {
+    //             console.log("No need");
+    //         }
+
+
+    //     })
+
+    // });
+
 
 
     // Get the modal
@@ -296,6 +320,7 @@ angular.module('newApp').controller('FacultySubjectsCtrl', function ($firebaseAr
 
 
     if (user_role == 'faculty') {
+        // $("#saveGrade").style.display = "block"
         var user_email_faculty = localStorage.getItem('email');
         // console.log(user_email_faculty);
         $scope.test101 = []
@@ -353,6 +378,8 @@ angular.module('newApp').controller('FacultySubjectsCtrl', function ($firebaseAr
             })
         });
     } else if (user_role == 'admin' || user_role == 'registrar') {
+        document.getElementById('saveGrade').style.visibility = 'hidden';
+        document.getElementById("myTableFieldSet").disabled = true;
 
         $scope.data = $firebaseArray(ref);
         ref.once('value', function (snapshot) {
@@ -408,6 +435,11 @@ angular.module('newApp').controller('FacultySubjectsCtrl', function ($firebaseAr
         $scope.clickedUser = users;
         $scope.studentsVal = [];
         $scope.studentsValKey = [];
+        var toHide = localStorage.getItem('role')
+
+        if (toHide == 'admin') {
+
+        }
 
         for (key in users.students) {
             if (users.students.hasOwnProperty(key)) {
@@ -561,15 +593,70 @@ angular.module('newApp').controller('FacultySubjectsCtrl', function ($firebaseAr
             var updateGradeRef = firebase.database().ref('block/' + $scope.studentsValKey[i].key + "/students/" + $scope.studentsValKey[i].studentKey);
             // console.log($scope.clickedUser2);
             updateGradeRef.update({
-                    prelim: $scope.tojson(obj)[i].Prelim,
-                    midterm: $scope.tojson(obj)[i].Midterm,
-                    prefinal: $scope.tojson(obj)[i].Prefinals,
-                    final: $scope.tojson(obj)[i].Finals,
-                })
-                .then(function (ref) {
-                    console.log('Added to database');
+                prelim: $scope.tojson(obj)[i].Prelim,
+                midterm: $scope.tojson(obj)[i].Midterm,
+                prefinal: $scope.tojson(obj)[i].Prefinals,
+                final: $scope.tojson(obj)[i].Finals,
+            })
+
+            firebase.database().ref("users").orderByChild("email").equalTo($scope.studentsValKey[i].email).once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    console.log(childSnapshot.val());
+                    // var childKey = childSnapshot.key();
+                    var childData = childSnapshot.val();
+                    console.log(childData.subjects);
+                    $scope.studentSubj = [];
+                    $scope.studentSubjtemp = [];
+                    var temp1;
+                    for (key in childData.subjects) {
+                        if (childData.subjects.hasOwnProperty(key) && key != 'gwa') {
+                            var value = childData.subjects[key];
+                            console.log($scope.clickedUser.subject);
+                            console.log(value.subject);
+                            console.log(value);
+                            if (value.subject == $scope.clickedUser.subject) {
+                                $scope.studentSubjtemp.push(value)
+                                temp1 = value;
+                            }
+                            $scope.studentSubj.push(value)
+                            //do something with value;
+                        }
+                    }
+                    console.log($scope.studentSubj);
+                    console.log($scope.studentSubjtemp);
+                    console.log(temp1);
+                    // console.log($scope.tojson(obj)[i]);
+                    // console.log($scope.studentsValKey.length);
+                    var updateGradeForUsersRef = firebase.database().ref('users/' + childSnapshot.val().key + "/subjects/" + temp1.key);
+                    for (var j = 0; j < $scope.studentsValKey.length; j++) {
+                        updateGradeForUsersRef.update({
+                            prelim: $scope.tojson(obj)[j].Prelim,
+                            midterm: $scope.tojson(obj)[j].Midterm,
+                            prefinal: $scope.tojson(obj)[j].Prefinals,
+                            final: $scope.tojson(obj)[j].Finals,
+                        })
+
+                    }
                     $('#myModal12').modal('hide')
-                });
+
+
+                })
+                // var select = document.getElementById('students');
+
+                // for (var i = 0; i < $scope.students.length; i++) {
+                //     var opt = document.createElement('option');
+                //     opt.value = $scope.students[i].key;
+                //     opt.innerHTML = $scope.students[i].firstName + " " + $scope.students[i].lastName + " (" + $scope.students[i].email + ")";
+                //     select.appendChild(opt);
+                // }
+                console.log(snapshot.val());
+
+            });
+
+            // .then(function (ref) {
+            //     console.log('Added to database');
+            //     $('#myModal12').modal('hide')
+            // });
         }
         // var x = 0;
         // while (x < $scope.studentsValKey.length) {

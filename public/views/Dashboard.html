@@ -201,35 +201,53 @@
         <div class="card-header">
           <h3 class="card-title">Dean's Lister</h3>
         </div>
-        <div class="col-sm-4">
-          <!-- <h3 class="m-0 text-dark">Athletes In Action</h3> -->
-          <label for="showCourse">Course</label>
-          <select
-            class="custom-select form-control"
-            id="showCourse"
-            ng-model="showCourse"
-            ng-change="show_course()"
-          >
-            <!-- <option value="select" selected>Select</option> -->
-            <option value="Multimedia">
-              Associate Computer Technology (Multimedia)
-            </option>
-            <option value="Networking">
-              Associate Computer Technology (Networking)
-            </option>
-            <option value="BSOA">
-              Bachelor of Science in Office Administration
-            </option>
-            <option value="BSIS">
-              Bachelor of Science in Information System
-            </option>
-            <option value="BSIT">
-              Bachelor of Science in Information Technology
-            </option>
-            <option value="BSCS">
-              Bachelor of Science in Computer Science
-            </option>
-          </select>
+        <div class="row">
+          <div class="col-md-3 mb-2">
+            <!-- <h3 class="m-0 text-dark">Athletes In Action</h3> -->
+            <label for="showCourse">Course</label>
+            <select
+              class="custom-select form-control"
+              id="showCourse"
+              ng-model="showCourse"
+              ng-change="show_course()"
+            >
+              <!-- <option value="select" selected>Select</option> -->
+              <option value="Multimedia">
+                Associate Computer Technology (Multimedia)
+              </option>
+              <option value="Networking">
+                Associate Computer Technology (Networking)
+              </option>
+              <option value="BSOA">
+                Bachelor of Science in Office Administration
+              </option>
+              <option value="BSIS">
+                Bachelor of Science in Information System
+              </option>
+              <option value="BSIT">
+                Bachelor of Science in Information Technology
+              </option>
+              <option value="BSCS">
+                Bachelor of Science in Computer Science
+              </option>
+            </select>
+          </div>
+          <div class="col-md-3 mb-2">
+            <label for="filterYear">Year</label>
+            <select
+              class="custom-select form-control"
+              id="filterYear"
+              ng-model="filterYear"
+              ng-change="filter_year()"
+            >
+              <option value="0">Select</option>
+              <option value="1">1st Year</option>
+              <option value="2">2nd Year</option>
+              <option value="3">3rd Year</option>
+              <option value="4">4th Year</option>
+              <!-- <option value="5">5th Year</option> -->
+            </select>
+          </div>
         </div>
         <div class="card-body">
           <table class="table table-bordered">
