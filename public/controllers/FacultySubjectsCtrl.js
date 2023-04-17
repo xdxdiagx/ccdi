@@ -597,6 +597,7 @@ angular.module('newApp').controller('FacultySubjectsCtrl', function ($firebaseAr
                 midterm: $scope.tojson(obj)[i].Midterm,
                 prefinal: $scope.tojson(obj)[i].Prefinals,
                 final: $scope.tojson(obj)[i].Finals,
+                remarks: $scope.tojson(obj)[i].Remarks,
             })
 
             firebase.database().ref("users").orderByChild("email").equalTo($scope.studentsValKey[i].email).once('value', function (snapshot) {
@@ -634,6 +635,7 @@ angular.module('newApp').controller('FacultySubjectsCtrl', function ($firebaseAr
                             midterm: $scope.tojson(obj)[j].Midterm,
                             prefinal: $scope.tojson(obj)[j].Prefinals,
                             final: $scope.tojson(obj)[j].Finals,
+                            remarks: $scope.tojson(obj)[i].Remarks,
                         })
 
                     }

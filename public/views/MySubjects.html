@@ -124,6 +124,20 @@
     </button>
     <br />
     <br /> -->
+    <div class="row">
+      <div class="col-md-3 mb-2">
+        <!-- <h3 class="m-0 text-dark">Athletes In Action</h3> -->
+        <!-- <label for="show_user">Search</label> -->
+        <input
+          type="text"
+          class="form-control"
+          id="search"
+          placeholder="Type to search"
+        />
+      </div>
+    </div>
+
+    <br />
 
     <table class="table table-bordered table-hover bg-white-only">
       <thead>
@@ -136,6 +150,7 @@
           <td style="width: 10%">Prefinal</td>
           <td style="width: 10%">Final</td>
           <td style="width: 10%">GWA</td>
+          <td style="width: 20%">Remarks</td>
           <!-- <td style="width: 10%">No. Students</td> -->
           <!-- <td style="width: 10%">Unit(s)</td> -->
           <!-- <td style="width:35%">Fullname</td> -->
@@ -188,6 +203,9 @@
           </td>
           <td class="v-middle">
             <span> {{ ((users.prelim * 1) + (users.midterm * 1) + (users.prefinal * 1) + (users.final * 1)) / 4 }} </span>
+          </td>
+          <td class="v-middle">
+            <span> {{ users.remarks }} </span>
           </td>
           <!--<td class="v-middle">
                    editable status (select-local) 
@@ -1066,3 +1084,33 @@
     </div>
   </div>
 </div>
+
+<script>
+  var table = document.getElementById("myTable"); //assuming the table has an ID of "myTable"
+  var searchInput = document.getElementById("search"); //assuming the input element has an ID of "searchInput"
+  searchInput.addEventListener("keyup", searchTable);
+
+  function searchTable() {
+    var query = searchInput.value.toLowerCase();
+    var rows = table.getElementsByTagName("tr");
+
+    for (var i = 0; i < rows.length; i++) {
+      var cells = rows[i].getElementsByTagName("td");
+      var match = false;
+
+      for (var j = 0; j < cells.length; j++) {
+        var cellText = cells[j].textContent.toLowerCase();
+        if (cellText.indexOf(query) > -1) {
+          match = true;
+          break;
+        }
+      }
+
+      if (match) {
+        rows[i].style.display = "";
+      } else {
+        rows[i].style.display = "none";
+      }
+    }
+  }
+</script>

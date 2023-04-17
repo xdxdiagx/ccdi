@@ -1,101 +1,11 @@
-<!-- <style>
-  /* The Modal (background) */
-
-  .modal {
+<style>
+  /* table tr {
     display: none;
-    /* Hidden by default */
-    position: fixed;
-    /* Stay in place */
-    z-index: 1;
-    /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%;
-    /* Full width */
-    height: 100%;
-    /* Full height */
-    overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);
-    /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
   }
-  /* Modal Content/Box */
-
-  .modal-content {
-    color: #414242;
-    margin: 15% auto;
-    /* 15% from the top and centered */
-    padding: 30px 60px;
-    width: 500px;
-    /* Could be more or less, depending on screen size */
-    font-family: Lato;
-    font-size: 16px;
-    line-height: 28px;
-    letter-spacing: 0.5px;
-    -webkit-font-smoothing: antialiased;
-    /* Rectangle 2 Copy 3: */
-    background: #ffffff;
-    border: 1px solid #9b9c9d;
-    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.2);
-    border-radius: 6px;
-  }
-
-  .modal-content a {
-    color: #636464;
-  }
-
-  .modal-content > h1 {
-    display: block;
-    width: 100%;
-    text-align: center;
-  }
-
-  button#accept {
-    margin: 30px auto;
-    display: block;
-    border: 1px solid #fc4c02;
-    border-radius: 3px;
-    background: #fff;
-    color: #fc4c02;
-    font-size: 16px;
-    height: 48px;
-    padding: 0 20px;
-    cursor: pointer;
-  }
-
-  .safety {
-    color: #9b9c9d;
-    font-size: 12px;
-    text-align: center;
-    display: block;
-    text-decoration: none;
-  }
-
-  .close {
-    background: #606061;
-    color: #ffffff;
-    line-height: 25px;
-    position: absolute;
-    right: -12px;
-    text-align: center;
-    top: -10px;
-    width: 24px;
-    text-decoration: none;
-    font-weight: bold;
-    -webkit-border-radius: 12px;
-    -moz-border-radius: 12px;
-    border-radius: 12px;
-    -moz-box-shadow: 1px 1px 3px #000;
-    -webkit-box-shadow: 1px 1px 3px #000;
-    box-shadow: 1px 1px 3px #000;
-  }
-
-  .close:hover {
-    background: #00d9ff;
-  }
-</style> -->
+  table tr:first-child {
+    display: table-row;
+  } */
+</style>
 
 <div>
   <!-- <h2>Users</h2> -->
@@ -124,6 +34,21 @@
     </button>
     <br />
     <br /> -->
+
+    <div class="row">
+      <div class="col-md-3 mb-2">
+        <!-- <h3 class="m-0 text-dark">Athletes In Action</h3> -->
+        <!-- <label for="show_user">Search</label> -->
+        <input
+          type="text"
+          class="form-control"
+          id="search"
+          placeholder="Type to search"
+        />
+      </div>
+    </div>
+
+    <br />
 
     <table class="table table-bordered table-hover bg-white-only">
       <thead>
@@ -1145,6 +1070,46 @@
 </div>
 
 <script>
+  var table = document.getElementById("myTable"); //assuming the table has an ID of "myTable"
+  var searchInput = document.getElementById("search"); //assuming the input element has an ID of "searchInput"
+  searchInput.addEventListener("keyup", searchTable);
+
+  function searchTable() {
+    var query = searchInput.value.toLowerCase();
+    var rows = table.getElementsByTagName("tr");
+
+    for (var i = 0; i < rows.length; i++) {
+      var cells = rows[i].getElementsByTagName("td");
+      var match = false;
+
+      for (var j = 0; j < cells.length; j++) {
+        var cellText = cells[j].textContent.toLowerCase();
+        if (cellText.indexOf(query) > -1) {
+          match = true;
+          break;
+        }
+      }
+
+      if (match) {
+        rows[i].style.display = "";
+      } else {
+        rows[i].style.display = "none";
+      }
+    }
+  }
+
+  // var $rows = $("#myTable tr");
+  // $("#search").keyup(function () {
+  //   var val = $.trim($(this).val()).replace(/ +/g, " ").toLowerCase();
+
+  //   $rows
+  //     .show()
+  //     .filter(function () {
+  //       var text = $(this).text().replace(/\s+/g, " ").toLowerCase();
+  //       return !~text.indexOf(val);
+  //     })
+  //     .hide();
+  // });
   $(document).ready(function () {
     $("#openBtn").click(() =>
       $("#myModal").modal({
